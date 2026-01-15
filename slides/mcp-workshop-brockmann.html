@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCP Workshop: From Explorer to Architect</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #000000;
+            --white: #ffffff;
+            --red: #e63328;
+            --gray: #f5f5f5;
+            --grid: rgba(0,0,0,0.06);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background: var(--black);
+            color: var(--black);
+            font-size: 16px;
+            line-height: 1.4;
+        }
+
+        /* SLIDE SYSTEM */
+        .slide {
+            width: 100vw;
+            height: 100vh;
+            display: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slide.active {
+            display: flex;
+        }
+
+        .slide-content {
+            width: 100%;
+            height: 100%;
+            padding: 64px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* GRID BACKGROUND */
+        .grid-bg {
+            background-image:
+                linear-gradient(var(--grid) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+            background-size: 48px 48px;
+        }
+
+        /* THEMES */
+        .theme-light {
+            background: var(--white);
+            color: var(--black);
+        }
+
+        .theme-dark {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .theme-red {
+            background: var(--red);
+            color: var(--white);
+        }
+
+        .theme-gray {
+            background: var(--gray);
+            color: var(--black);
+        }
+
+        /* TYPOGRAPHY */
+        .hero-text {
+            font-size: clamp(64px, 12vw, 180px);
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            line-height: 0.9;
+            text-transform: uppercase;
+        }
+
+        .large-text {
+            font-size: clamp(48px, 8vw, 120px);
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            line-height: 0.95;
+        }
+
+        .medium-text {
+            font-size: clamp(32px, 5vw, 72px);
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            line-height: 1.1;
+        }
+
+        .body-text {
+            font-size: clamp(18px, 2.5vw, 32px);
+            font-weight: 400;
+            line-height: 1.5;
+            max-width: 800px;
+        }
+
+        .small-text {
+            font-size: clamp(14px, 1.5vw, 20px);
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .mono {
+            font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
+        }
+
+        /* ACCENT */
+        .accent {
+            color: var(--red);
+        }
+
+        .theme-dark .accent,
+        .theme-red .accent {
+            color: var(--white);
+        }
+
+        /* LAYOUT HELPERS */
+        .left-align {
+            text-align: left;
+            align-items: flex-start;
+        }
+
+        .center-align {
+            text-align: center;
+            align-items: center;
+        }
+
+        .bottom-left {
+            position: absolute;
+            bottom: 64px;
+            left: 64px;
+        }
+
+        .bottom-right {
+            position: absolute;
+            bottom: 64px;
+            right: 64px;
+        }
+
+        .top-right {
+            position: absolute;
+            top: 64px;
+            right: 64px;
+        }
+
+        /* GEOMETRIC ELEMENTS */
+        .red-bar {
+            width: 120px;
+            height: 8px;
+            background: var(--red);
+            margin-bottom: 32px;
+        }
+
+        .theme-dark .red-bar,
+        .theme-red .red-bar {
+            background: var(--white);
+        }
+
+        .red-block {
+            position: absolute;
+            background: var(--red);
+        }
+
+        .circle {
+            border-radius: 50%;
+        }
+
+        /* TWO COLUMN */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            width: 100%;
+        }
+
+        .col {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        /* STATS */
+        .stats-row {
+            display: flex;
+            gap: 64px;
+            margin-top: 48px;
+        }
+
+        .stat {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .stat-value {
+            font-size: clamp(48px, 8vw, 96px);
+            font-weight: 900;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: clamp(14px, 1.5vw, 18px);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            opacity: 0.7;
+        }
+
+        /* QUOTE */
+        .quote {
+            font-size: clamp(28px, 4vw, 56px);
+            font-weight: 700;
+            line-height: 1.3;
+            max-width: 900px;
+        }
+
+        .quote-author {
+            margin-top: 32px;
+            font-size: clamp(16px, 2vw, 24px);
+            font-weight: 400;
+        }
+
+        /* CODE */
+        .code-block {
+            background: var(--black);
+            color: var(--white);
+            padding: 32px;
+            font-family: 'SF Mono', monospace;
+            font-size: clamp(14px, 1.8vw, 22px);
+            line-height: 1.6;
+            white-space: pre;
+            overflow-x: auto;
+            border-left: 4px solid var(--red);
+        }
+
+        .theme-dark .code-block {
+            background: rgba(255,255,255,0.1);
+            border-left-color: var(--white);
+        }
+
+        /* BULLETS */
+        .bullets {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .bullets li {
+            font-size: clamp(18px, 2.5vw, 28px);
+            padding-left: 32px;
+            position: relative;
+        }
+
+        .bullets li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 12px;
+            width: 12px;
+            height: 12px;
+            background: var(--red);
+        }
+
+        .theme-dark .bullets li::before,
+        .theme-red .bullets li::before {
+            background: var(--white);
+        }
+
+        /* NAVIGATION */
+        .nav-hint {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            font-size: 12px;
+            color: rgba(128,128,128,0.5);
+            z-index: 100;
+        }
+
+        .slide-number {
+            position: fixed;
+            bottom: 24px;
+            left: 24px;
+            font-size: 14px;
+            font-weight: 700;
+            color: rgba(128,128,128,0.5);
+            z-index: 100;
+        }
+
+        /* PROGRESS BAR */
+        .progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: var(--red);
+            z-index: 100;
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="progress" id="progress"></div>
+    <div class="slide-number" id="slideNumber"></div>
+    <div class="nav-hint">← →</div>
+
+    <!-- SLIDE 1: TITLE -->
+    <section class="slide theme-light grid-bg active">
+        <div class="slide-content left-align">
+            <div class="red-bar"></div>
+            <h1 class="hero-text">MCP<br>WORKSHOP</h1>
+            <p class="medium-text" style="margin-top: 32px;">From Explorer to Architect</p>
+            <p class="small-text" style="margin-top: 48px; opacity: 0.6;">1 Hour · 3 Levels · Live Demos</p>
+        </div>
+        <div class="red-block" style="width: 200px; height: 100vh; right: 0; top: 0;"></div>
+    </section>
+
+    <!-- SLIDE 2: THE PROBLEM -->
+    <section class="slide theme-dark">
+        <div class="slide-content center-align">
+            <p class="quote">"AI that knows everything and does nothing is an expensive search bar."</p>
+        </div>
+    </section>
+
+    <!-- SLIDE 3: WHAT AI CAN'T DO -->
+    <section class="slide theme-light grid-bg">
+        <div class="slide-content left-align">
+            <div class="red-bar"></div>
+            <h2 class="large-text">AI can't:</h2>
+            <ul class="bullets" style="margin-top: 48px;">
+                <li>Create a Miro board</li>
+                <li>Update your roadmap</li>
+                <li>Control your browser</li>
+                <li>Edit files on your machine</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- SLIDE 4: RAG VS MCP -->
+    <section class="slide theme-light">
+        <div class="slide-content">
+            <div class="two-col" style="align-items: center;">
+                <div class="col" style="align-items: center; text-align: center;">
+                    <p class="small-text" style="opacity: 0.5;">Before</p>
+                    <h2 class="large-text">RAG</h2>
+                    <!-- Arrows pointing IN to center circle -->
+                    <svg width="280" height="280" viewBox="0 0 280 280" style="margin: 32px 0;">
+                        <circle cx="140" cy="140" r="50" fill="none" stroke="#000" stroke-width="3"/>
+                        <text x="140" y="148" text-anchor="middle" font-family="Inter" font-weight="700" font-size="20">AI</text>
+                        <!-- Arrows pointing IN -->
+                        <g stroke="#000" stroke-width="2" fill="#000">
+                            <line x1="140" y1="20" x2="140" y2="80"/><polygon points="140,85 135,75 145,75"/>
+                            <line x1="260" y1="140" x2="200" y2="140"/><polygon points="195,140 205,135 205,145"/>
+                            <line x1="140" y1="260" x2="140" y2="200"/><polygon points="140,195 145,205 135,205"/>
+                            <line x1="20" y1="140" x2="80" y2="140"/><polygon points="85,140 75,145 75,135"/>
+                            <line x1="55" y1="55" x2="100" y2="100"/><polygon points="105,105 93,102 98,90"/>
+                            <line x1="225" y1="55" x2="180" y2="100"/><polygon points="175,105 182,90 187,102"/>
+                        </g>
+                    </svg>
+                    <p class="body-text" style="opacity: 0.5;">Retrieves. Reads. Reports.</p>
+                </div>
+                <div class="col" style="align-items: center; text-align: center; border-left: 4px solid var(--red); padding-left: 64px;">
+                    <p class="small-text" style="color: var(--red);">After</p>
+                    <h2 class="large-text" style="color: var(--red);">MCP</h2>
+                    <!-- Arrows pointing OUT from center circle -->
+                    <svg width="280" height="280" viewBox="0 0 280 280" style="margin: 32px 0;">
+                        <circle cx="140" cy="140" r="50" fill="var(--red)" stroke="none"/>
+                        <text x="140" y="148" text-anchor="middle" font-family="Inter" font-weight="700" font-size="20" fill="#fff">AI</text>
+                        <!-- Arrows pointing OUT -->
+                        <g stroke="var(--red)" stroke-width="3" fill="var(--red)">
+                            <line x1="140" y1="85" x2="140" y2="25"/><polygon points="140,20 135,30 145,30"/>
+                            <line x1="195" y1="140" x2="255" y2="140"/><polygon points="260,140 250,135 250,145"/>
+                            <line x1="140" y1="195" x2="140" y2="255"/><polygon points="140,260 145,250 135,250"/>
+                            <line x1="85" y1="140" x2="25" y2="140"/><polygon points="20,140 30,145 30,135"/>
+                            <line x1="105" y1="105" x2="60" y2="60"/><polygon points="55,55 68,58 63,70"/>
+                            <line x1="175" y1="105" x2="220" y2="60"/><polygon points="225,55 212,70 217,58"/>
+                            <line x1="175" y1="175" x2="220" y2="220"/><polygon points="225,225 217,212 212,225"/>
+                            <line x1="105" y1="175" x2="60" y2="220"/><polygon points="55,225 68,222 63,210"/>
+                        </g>
+                    </svg>
+                    <p class="body-text" style="color: var(--red); font-weight: 700;">Creates. Controls. Executes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE 5: USB ANALOGY -->
+    <section class="slide theme-red">
+        <div class="slide-content center-align">
+            <h2 class="hero-text">MCP = USB<br>FOR AI</h2>
+            <p class="body-text" style="margin-top: 48px; max-width: 600px;">One standard protocol.<br>Any AI. Any app.</p>
+        </div>
+    </section>
+
+    <!-- SLIDE 6: THREE PARTS -->
+    <section class="slide theme-light grid-bg">
+        <div class="slide-content left-align">
+            <div class="red-bar"></div>
+            <h2 class="medium-text">The Protocol</h2>
+            <div class="stats-row">
+                <div class="stat">
+                    <span class="stat-value">1</span>
+                    <span class="stat-label">Client</span>
+                    <span class="body-text" style="font-size: 18px; margin-top: 8px;">Claude, ChatGPT, Cursor</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">2</span>
+                    <span class="stat-label">Server</span>
+                    <span class="body-text" style="font-size: 18px; margin-top: 8px;">The bridge you build</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">3</span>
+                    <span class="stat-label">App</span>
+                    <span class="body-text" style="font-size: 18px; margin-top: 8px;">Miro, browser, files</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE 7: CLOUD VS LOCAL -->
+    <section class="slide theme-gray">
+        <div class="slide-content">
+            <div class="two-col">
+                <div class="col">
+                    <p class="small-text">Cloud</p>
+                    <h2 class="medium-text">☁️</h2>
+                    <ul class="bullets" style="margin-top: 24px;">
+                        <li>Miro</li>
+                        <li>ProductPlan</li>
+                        <li>GLEIF API</li>
+                        <li>MediaWiki</li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <p class="small-text">Local</p>
+                    <h2 class="medium-text">💻</h2>
+                    <ul class="bullets" style="margin-top: 24px;">
+                        <li>Browser (Playwright)</li>
+                        <li>Filesystem</li>
+                        <li>Git repos</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE 8: EXPLORER -->
+    <section class="slide theme-dark">
+        <div class="slide-content left-align">
+            <p class="small-text" style="opacity: 0.5;">Tier 1</p>
+            <h1 class="hero-text" style="margin-top: 16px;">EXPLORER</h1>
+            <p class="large-text accent" style="margin-top: 32px;">"What can it do?"</p>
+            <p class="body-text" style="margin-top: 48px; opacity: 0.6;">Curious. Watching demos. Seeing possibilities.</p>
+        </div>
+        <div class="red-block circle" style="width: 300px; height: 300px; right: 100px; bottom: 100px; opacity: 0.3;"></div>
+    </section>
+
+    <!-- SLIDE 9: PRACTITIONER -->
+    <section class="slide theme-light grid-bg">
+        <div class="slide-content left-align">
+            <p class="small-text" style="color: var(--red);">Tier 2</p>
+            <h1 class="hero-text" style="margin-top: 16px;">PRACTI<br>TIONER</h1>
+            <p class="large-text" style="margin-top: 32px; color: var(--red);">"What can it do for me?"</p>
+            <p class="body-text" style="margin-top: 48px; opacity: 0.6;">Using daily. Getting value. Prompting with intent.</p>
+        </div>
+    </section>
+
+    <!-- SLIDE 10: SETUP -->
+    <section class="slide theme-dark">
+        <div class="slide-content left-align">
+            <div class="red-bar"></div>
+            <h2 class="medium-text">Setup: 3 Steps</h2>
+            <div class="code-block" style="margin-top: 32px;">{
+  "mcpServers": {
+    "gleif": {
+      "command": "/path/to/gleif-mcp-server"
+    }
+  }
+}</div>
+            <p class="body-text" style="margin-top: 32px; opacity: 0.6;">claude_desktop_config.json → restart → done</p>
+        </div>
+    </section>
+
+    <!-- SLIDE 11: PROMPT WITH INTENT -->
+    <section class="slide theme-light grid-bg">
+        <div class="slide-content left-align">
+            <div class="red-bar"></div>
+            <h2 class="medium-text">Be specific</h2>
+            <ul class="bullets" style="margin-top: 48px;">
+                <li>"Use the <strong>wiki server</strong> to search for auth docs"</li>
+                <li>"Create a <strong>Miro sticky</strong> saying Review API"</li>
+                <li>"Use <strong>Playwright</strong> to screenshot the login page"</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- SLIDE 12: CAPABILITIES -->
+    <section class="slide theme-red">
+        <div class="slide-content center-align">
+            <h2 class="medium-text" style="margin-bottom: 48px;">Tools per server</h2>
+            <div class="stats-row" style="justify-content: center;">
+                <div class="stat" style="text-align: center;">
+                    <span class="stat-value">4</span>
+                    <span class="stat-label">GLEIF</span>
+                </div>
+                <div class="stat" style="text-align: center;">
+                    <span class="stat-value">38</span>
+                    <span class="stat-label">ProductPlan</span>
+                </div>
+                <div class="stat" style="text-align: center;">
+                    <span class="stat-value">77</span>
+                    <span class="stat-label">Miro</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE 13: ARCHITECT -->
+    <section class="slide theme-dark">
+        <div class="slide-content left-align">
+            <p class="small-text" style="opacity: 0.5;">Tier 3</p>
+            <h1 class="hero-text" style="margin-top: 16px;">ARCHI<br>TECT</h1>
+            <p class="large-text accent" style="margin-top: 32px;">"What can I make it do?"</p>
+            <p class="body-text" style="margin-top: 48px; opacity: 0.6;">Designing systems. Building servers. Enabling others.</p>
+        </div>
+        <div class="red-block" style="width: 400px; height: 400px; right: 64px; bottom: 64px;"></div>
+    </section>
+
+    <!-- SLIDE 14: MY JOURNEY -->
+    <section class="slide theme-light grid-bg">
+        <div class="slide-content left-align">
+            <div class="red-bar"></div>
+            <h2 class="medium-text">December 2024</h2>
+            <p class="body-text" style="margin-top: 16px; opacity: 0.6;">4 servers in 4 weeks</p>
+            <div class="stats-row" style="flex-wrap: wrap; gap: 32px; margin-top: 32px;">
+                <div class="stat" style="min-width: 200px;">
+                    <span class="small-text" style="color: var(--red);">Dec 4</span>
+                    <span class="body-text" style="font-weight: 700;">ProductPlan</span>
+                    <span class="body-text" style="font-size: 16px; opacity: 0.6;">First attempt. Learned SDK.</span>
+                </div>
+                <div class="stat" style="min-width: 200px;">
+                    <span class="small-text" style="color: var(--red);">Dec 10</span>
+                    <span class="body-text" style="font-weight: 700;">MediaWiki</span>
+                    <span class="body-text" style="font-size: 16px; opacity: 0.6;">Auth, rate limiting.</span>
+                </div>
+                <div class="stat" style="min-width: 200px;">
+                    <span class="small-text" style="color: var(--red);">Dec 20</span>
+                    <span class="body-text" style="font-weight: 700;">Miro</span>
+                    <span class="body-text" style="font-size: 16px; opacity: 0.6;">77 tools, bulk ops.</span>
+                </div>
+                <div class="stat" style="min-width: 200px;">
+                    <span class="small-text" style="color: var(--red);">Dec 31</span>
+                    <span class="body-text" style="font-weight: 700;">GLEIF</span>
+                    <span class="body-text" style="font-size: 16px; opacity: 0.6;">Minimal, production-ready.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE 15: ARCHITECTURE -->
+    <section class="slide theme-dark">
+        <div class="slide-content left-align">
+            <div class="red-bar"></div>
+            <h2 class="medium-text">Server Structure</h2>
+            <div class="code-block" style="margin-top: 32px;">server/
+├── main.go            # Entry point
+├── tools/
+│   ├── definitions.go # What it can do
+│   └── handlers.go    # How it does it
+├── client/
+│   └── client.go      # API calls
+└── cache/             # Optional</div>
+        </div>
+    </section>
+
+    <!-- SLIDE 16: MIRO CEO -->
+    <section class="slide theme-red">
+        <div class="slide-content center-align">
+            <p class="quote">"Hi Olga, impressive work on Miro MCP, thank you!"</p>
+            <p class="quote-author"><strong>Andrey Khusid</strong><br>CEO at Miro</p>
+        </div>
+    </section>
+
+    <!-- SLIDE 17: INTERNAL FEEDBACK -->
+    <section class="slide theme-light grid-bg">
+        <div class="slide-content center-align">
+            <p class="quote" style="font-size: clamp(24px, 3vw, 40px);">"Since getting this up & running it has been SO useful in making everyday work more efficient."</p>
+            <p class="quote-author" style="color: var(--red);"><strong>Jenny Felldin</strong><br>Colleague · Seen by 96 people</p>
+        </div>
+    </section>
+
+    <!-- SLIDE 18: THE MESSAGE -->
+    <section class="slide theme-dark">
+        <div class="slide-content center-align">
+            <h2 class="large-text">You stop building<br>for yourself.</h2>
+            <h2 class="large-text accent" style="margin-top: 32px;">You start enabling<br>others.</h2>
+        </div>
+    </section>
+
+    <!-- SLIDE 19: TAKEAWAYS -->
+    <section class="slide theme-light grid-bg">
+        <div class="slide-content left-align">
+            <div class="red-bar"></div>
+            <h2 class="medium-text">Takeaways</h2>
+            <div style="margin-top: 48px; display: flex; flex-direction: column; gap: 32px;">
+                <div>
+                    <p class="small-text" style="color: var(--red);">Explorer</p>
+                    <p class="body-text">MCP lets AI act, not just answer</p>
+                </div>
+                <div>
+                    <p class="small-text" style="color: var(--red);">Practitioner</p>
+                    <p class="body-text">Download, configure, restart</p>
+                </div>
+                <div>
+                    <p class="small-text" style="color: var(--red);">Architect</p>
+                    <p class="body-text">Start small, enable others</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE 20: RESOURCES -->
+    <section class="slide theme-gray">
+        <div class="slide-content left-align">
+            <div class="red-bar"></div>
+            <h2 class="medium-text">Resources</h2>
+            <ul class="bullets" style="margin-top: 48px;">
+                <li><span class="mono">modelcontextprotocol.io</span></li>
+                <li><span class="mono">github.com/olgasafonova/gleif-mcp-server</span></li>
+                <li><span class="mono">github.com/olgasafonova/miro-mcp-server</span></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- SLIDE 21: CLOSING -->
+    <section class="slide theme-dark">
+        <div class="slide-content center-align">
+            <h1 class="hero-text">?</h1>
+            <p class="body-text" style="margin-top: 48px;">linkedin.com/in/olgasafonova</p>
+            <p class="body-text" style="opacity: 0.5;">substack.com/@olgasafonova</p>
+        </div>
+        <div class="red-block" style="width: 100%; height: 8px; bottom: 0; left: 0;"></div>
+    </section>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const progress = document.getElementById('progress');
+        const slideNumber = document.getElementById('slideNumber');
+        let current = 0;
+
+        function updateSlide() {
+            slides.forEach((s, i) => s.classList.toggle('active', i === current));
+            progress.style.width = ((current + 1) / slides.length * 100) + '%';
+            slideNumber.textContent = (current + 1) + ' / ' + slides.length;
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                current = Math.min(current + 1, slides.length - 1);
+                updateSlide();
+            } else if (e.key === 'ArrowLeft') {
+                current = Math.max(current - 1, 0);
+                updateSlide();
+            }
+        });
+
+        // Touch support
+        let touchStart = 0;
+        document.addEventListener('touchstart', (e) => touchStart = e.touches[0].clientX);
+        document.addEventListener('touchend', (e) => {
+            const diff = touchStart - e.changedTouches[0].clientX;
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) current = Math.min(current + 1, slides.length - 1);
+                else current = Math.max(current - 1, 0);
+                updateSlide();
+            }
+        });
+
+        updateSlide();
+    </script>
+</body>
+</html>

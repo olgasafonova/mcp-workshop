@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MCP Workshop</title>
+
+  <!-- Google Fonts (if using web fonts) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Anime.js for animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+
+  <style>
+/* Nano Banana Presentation Styles
+   Brand-flexible CSS using CSS custom properties */
+
+/* === BRAND VARIABLES (injected from config) === */
+:root {
+  /* Colors */
+  --color-primary: #2563eb;
+  --color-secondary: #64748b;
+  --color-accent: #8b5cf6;
+  --color-success: #22c55e;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  --color-background: #ffffff;
+  --color-foreground: #0f172a;
+  --color-muted: #f1f5f9;
+  --color-border: #e2e8f0;
+
+  /* Typography */
+  --font-heading: system-ui, -apple-system, sans-serif;
+  --font-body: system-ui, -apple-system, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', monospace;
+  --font-weight-heading: 700;
+  --font-size-base: 18px;
+  --font-scale: 1.25;
+
+  /* Style */
+  --border-radius: 8px;
+  --border-width: 1px;
+  --shadow-offset: 0 4px 6px -1px;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+
+  /* Computed sizes */
+  --font-size-xs: calc(var(--font-size-base) / var(--font-scale) / var(--font-scale));
+  --font-size-sm: calc(var(--font-size-base) / var(--font-scale));
+  --font-size-md: var(--font-size-base);
+  --font-size-lg: calc(var(--font-size-base) * var(--font-scale));
+  --font-size-xl: calc(var(--font-size-base) * var(--font-scale) * var(--font-scale));
+  --font-size-2xl: calc(var(--font-size-base) * var(--font-scale) * var(--font-scale) * var(--font-scale));
+  --font-size-3xl: calc(var(--font-size-base) * var(--font-scale) * var(--font-scale) * var(--font-scale) * var(--font-scale));
+
+  /* Slide dimensions */
+  --slide-width: 1920px;
+  --slide-height: 1080px;
+}
+
+/* === RESET & BASE === */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: var(--font-size-base);
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-foreground);
+  background-color: var(--color-background);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* === SLIDES CONTAINER === */
+.slides {
+  width: 100%;
+  max-width: var(--slide-width);
+  margin: 0 auto;
+}
+
+.slide {
+  min-height: 100vh;
+  width: 100%;
+  padding: 80px 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  scroll-snap-align: start;
+  position: relative;
+  overflow: hidden;
+}
+
+/* === SLIDE THEMES === */
+.slide--light {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+}
+
+.slide--dark {
+  background-color: var(--color-foreground);
+  color: var(--color-background);
+}
+
+.slide--primary {
+  background-color: var(--color-primary);
+  color: var(--color-background);
+}
+
+.slide--secondary {
+  background-color: var(--color-secondary);
+  color: var(--color-background);
+}
+
+.slide--accent {
+  background-color: var(--color-accent);
+  color: var(--color-foreground);
+}
+
+.slide--muted {
+  background-color: var(--color-muted);
+  color: var(--color-foreground);
+}
+
+/* === TYPOGRAPHY === */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-heading);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5em;
+}
+
+h1 { font-size: var(--font-size-3xl); }
+h2 { font-size: var(--font-size-2xl); }
+h3 { font-size: var(--font-size-xl); }
+h4 { font-size: var(--font-size-lg); }
+h5 { font-size: var(--font-size-md); }
+h6 { font-size: var(--font-size-sm); }
+
+p {
+  font-size: var(--font-size-md);
+  margin-bottom: 1em;
+  max-width: 65ch;
+}
+
+.subtitle {
+  font-size: var(--font-size-lg);
+  opacity: 0.8;
+  margin-top: 0.5em;
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.7;
+}
+
+/*
+ * Accent elements use primary color for text (WCAG 2.2 AA compliant)
+ * Accent color only used for backgrounds, borders, and decorative elements
+ */
+.highlight {
+  background-color: var(--color-accent);
+  color: var(--color-foreground);
+  padding: 0.1em 0.4em;
+  border-radius: calc(var(--border-radius) / 2);
+  font-weight: 600;
+}
+
+.badge {
+  display: inline-block;
+  background-color: var(--color-accent);
+  color: var(--color-foreground);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.4em 0.8em;
+  border-radius: calc(var(--border-radius) / 2);
+}
+
+/* Accent text uses PRIMARY color (not accent) for WCAG compliance */
+.accent-text {
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.accent-border {
+  border-left: 4px solid var(--color-accent);
+  padding-left: 1em;
+}
+
+.accent-underline {
+  text-decoration: underline;
+  text-decoration-color: var(--color-accent);
+  text-decoration-thickness: 3px;
+  text-underline-offset: 4px;
+}
+
+/* On dark backgrounds, accent color can be used for text */
+.slide--dark .accent-text,
+.slide--primary .accent-text {
+  color: var(--color-accent);
+}
+
+/* === LISTS === */
+ul, ol {
+  font-size: var(--font-size-md);
+  padding-left: 1.5em;
+  margin-bottom: 1em;
+}
+
+li {
+  margin-bottom: 0.5em;
+}
+
+li::marker {
+  color: var(--color-primary);
+}
+
+/* === CODE === */
+code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  background-color: var(--color-muted);
+  padding: 0.15em 0.4em;
+  border-radius: calc(var(--border-radius) / 2);
+}
+
+pre {
+  background-color: #1e293b;
+  color: #e2e8f0;
+  padding: 24px 32px;
+  border-radius: var(--border-radius);
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+  line-height: 1.7;
+  margin: 1.5em 0;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+  font-size: inherit;
+}
+
+/* Syntax highlighting */
+.code-comment { color: #6b7280; font-style: italic; }
+.code-string { color: #a5d6a7; }
+.code-keyword { color: #90caf9; }
+.code-number { color: #ffcc80; }
+.code-function { color: #ce93d8; }
+.code-operator { color: #80deea; }
+
+/* === CARDS & BOXES === */
+.card {
+  background-color: var(--color-background);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--border-radius);
+  padding: 24px 32px;
+  box-shadow: var(--shadow-offset) var(--shadow-color);
+}
+
+.card--elevated {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+}
+
+.box {
+  background-color: var(--color-muted);
+  padding: 24px 32px;
+  border-radius: var(--border-radius);
+}
+
+/* === LAYOUTS === */
+.centered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.three-col {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.four-col {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+/* === STATS === */
+.stats-row {
+  display: flex;
+  gap: 64px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat-value {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-heading);
+  color: var(--color-primary);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: var(--font-size-sm);
+  color: var(--color-secondary);
+  margin-top: 0.5em;
+}
+
+/* === TASK CARDS === */
+.task-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-top: 32px;
+}
+
+.task-card {
+  background: var(--color-background);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--border-radius);
+  padding: 24px;
+  box-shadow: var(--shadow-offset) var(--shadow-color);
+}
+
+.task-number {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  color: var(--color-primary);
+  margin-bottom: 8px;
+}
+
+.task-title {
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-heading);
+  font-size: var(--font-size-lg);
+  margin-bottom: 8px;
+}
+
+.task-description {
+  font-size: var(--font-size-sm);
+  color: var(--color-secondary);
+}
+
+/* === QUOTES === */
+blockquote {
+  border-left: 4px solid var(--color-primary);
+  padding-left: 24px;
+  font-size: var(--font-size-lg);
+  font-style: italic;
+  margin: 1.5em 0;
+}
+
+blockquote cite {
+  display: block;
+  font-size: var(--font-size-sm);
+  font-style: normal;
+  color: var(--color-secondary);
+  margin-top: 1em;
+}
+
+/* === IMAGES === */
+.image-container {
+  width: 100%;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.image-container img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+/* Full-bleed: covers entire slide as background */
+.image-container--full {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  z-index: 0;
+}
+
+.image-container--full img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Wide: large image, preserves aspect ratio */
+.image-container--wide {
+  width: 100%;
+  max-height: 55vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-container--wide img {
+  max-width: 100%;
+  max-height: 55vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Medium: constrained for content slides */
+.image-container--medium {
+  max-width: 80%;
+  max-height: 45vh;
+  margin: 0 auto;
+}
+
+.image-container--medium img {
+  max-height: 45vh;
+  width: auto;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* Small: thumbnail size */
+.image-container--small {
+  max-width: 300px;
+  max-height: 200px;
+}
+
+/* Cover variant (legacy) */
+.image-container--cover img {
+  object-fit: cover;
+  height: 100%;
+}
+
+.image-caption {
+  font-size: var(--font-size-sm);
+  color: var(--color-secondary);
+  text-align: center;
+  margin-top: 12px;
+}
+
+/* === TERMINAL === */
+.terminal {
+  background-color: #1a1a2e;
+  border-radius: var(--border-radius);
+  padding: 24px 32px;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+  color: #a0aec0;
+}
+
+.terminal-header {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.terminal-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.terminal-dot--red { background: #ff5f56; }
+.terminal-dot--yellow { background: #ffbd2e; }
+.terminal-dot--green { background: #27c93f; }
+
+.terminal-line {
+  margin: 4px 0;
+}
+
+.terminal-prompt {
+  color: var(--color-success);
+}
+
+.terminal-command {
+  color: #e2e8f0;
+}
+
+.terminal-output {
+  color: #718096;
+}
+
+/* === COMPARISON === */
+.comparison {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+}
+
+.comparison-side {
+  padding: 32px;
+  border-radius: var(--border-radius);
+}
+
+.comparison-side--before {
+  background-color: rgba(239, 68, 68, 0.1);
+  border: 2px solid var(--color-error);
+}
+
+.comparison-side--after {
+  background-color: rgba(34, 197, 94, 0.1);
+  border: 2px solid var(--color-success);
+}
+
+.comparison-title {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 16px;
+}
+
+/* === LOGO === */
+.logo {
+  position: absolute;
+  z-index: 100;
+}
+
+.logo--top-left {
+  top: 40px;
+  left: 40px;
+}
+
+.logo--top-right {
+  top: 40px;
+  right: 40px;
+}
+
+.logo--bottom-left {
+  bottom: 40px;
+  left: 40px;
+}
+
+.logo--bottom-right {
+  bottom: 40px;
+  right: 40px;
+}
+
+.logo img {
+  height: 48px;
+  width: auto;
+}
+
+/* === NAVIGATION === */
+.nav-dots {
+  position: fixed;
+  right: 32px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 1000;
+}
+
+.nav-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: var(--color-border);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nav-dot:hover {
+  background-color: var(--color-secondary);
+  transform: scale(1.2);
+}
+
+.nav-dot.active {
+  background-color: var(--color-primary);
+  transform: scale(1.3);
+}
+
+/* === ANIMATIONS === */
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 0.5s ease forwards;
+}
+
+.slide-up {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: slideUp 0.5s ease forwards;
+}
+
+.scale-in {
+  opacity: 0;
+  transform: scale(0.9);
+  animation: scaleIn 0.4s ease forwards;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Staggered animation delays */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+
+/* === RESPONSIVE === */
+@media (max-width: 1200px) {
+  .slide {
+    padding: 60px 80px;
+  }
+
+  .two-col, .comparison {
+    gap: 32px;
+  }
+
+  .task-grid {
+    gap: 16px;
+  }
+}
+
+@media (max-width: 900px) {
+  .slide {
+    padding: 40px;
+  }
+
+  .two-col,
+  .comparison,
+  .task-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .three-col {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .four-col {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .stats-row {
+    gap: 32px;
+  }
+}
+
+/* === PRINT === */
+@media print {
+  .slide {
+    page-break-after: always;
+    min-height: 100vh;
+  }
+
+  .nav-dots {
+    display: none;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <!-- Navigation dots -->
+  <nav class="nav-dots" aria-label="Slide navigation">
+    <button class="nav-dot active" aria-label="Go to slide 1"></button>
+    <button class="nav-dot" aria-label="Go to slide 2"></button>
+    <button class="nav-dot" aria-label="Go to slide 3"></button>
+    <button class="nav-dot" aria-label="Go to slide 4"></button>
+    <button class="nav-dot" aria-label="Go to slide 5"></button>
+    <button class="nav-dot" aria-label="Go to slide 6"></button>
+    <button class="nav-dot" aria-label="Go to slide 7"></button>
+    <button class="nav-dot" aria-label="Go to slide 8"></button>
+    <button class="nav-dot" aria-label="Go to slide 9"></button>
+    <button class="nav-dot" aria-label="Go to slide 10"></button>
+    <button class="nav-dot" aria-label="Go to slide 11"></button>
+    <button class="nav-dot" aria-label="Go to slide 12"></button>
+    <button class="nav-dot" aria-label="Go to slide 13"></button>
+    <button class="nav-dot" aria-label="Go to slide 14"></button>
+    <button class="nav-dot" aria-label="Go to slide 15"></button>
+    <button class="nav-dot" aria-label="Go to slide 16"></button>
+    <button class="nav-dot" aria-label="Go to slide 17"></button>
+    <button class="nav-dot" aria-label="Go to slide 18"></button>
+    <button class="nav-dot" aria-label="Go to slide 19"></button>
+    <button class="nav-dot" aria-label="Go to slide 20"></button>
+  </nav>
+
+  <!-- Slides container -->
+  <main class="slides">
+
+  <section class="slide slide--primary" id="slide-1">
+
+    <div class="centered">
+      <span class="badge">1 Hour • 3 Levels • Live Demos</span>
+      <h1>MCP WORKSHOP</h1>
+      <p class="subtitle">From Explorer to Architect</p>
+    </div>
+  </section>
+
+  <section class="slide slide--dark" id="slide-2">
+
+    <div class="centered">
+      <blockquote>AI that knows everything and does nothing is an expensive search bar.
+      </blockquote>
+    </div>
+  </section>
+
+  <section class="slide slide--light" id="slide-3">
+
+    <div>
+      <h2>AI Today</h2>
+      <p>Most AI assistants can answer questions, summarize documents, generate text.</p>
+      <ul>
+        <li>Can&#x27;t create a Miro board for your workshop</li>
+        <li>Can&#x27;t update your roadmap in ProductPlan</li>
+        <li>Can&#x27;t control your browser to fill out forms</li>
+        <li>Can&#x27;t edit files on your machine</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="slide slide--light" id="slide-4">
+
+    <div>
+      <h2>RAG vs MCP</h2>
+      <div class="comparison">
+        <div class="comparison-side comparison-side--before">
+          <div class="comparison-title">RAG</div>
+        </div>
+        <div class="comparison-side comparison-side--after">
+          <div class="comparison-title">MCP</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide slide--muted" id="slide-5">
+
+    <div>
+      <h2>MCP = USB for AI</h2>
+      <p>One standard protocol that connects any AI to any app.</p>
+      <ul>
+        <li>Before USB: Every device had its own cable</li>
+        <li>After USB: One standard, everything connects</li>
+        <li>Before MCP: Custom integration for each AI + app</li>
+        <li>After MCP: One protocol, universal compatibility</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="slide slide--light" id="slide-6">
+
+    <div class="centered">
+      <h2>The Three Parts</h2>
+      <div class="stats-row">
+        <div class="stat">
+          <div class="stat-value">Client</div>
+          <div class="stat-label">AI assistant (Claude, ChatGPT, Cursor)</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">Server</div>
+          <div class="stat-label">The bridge (your MCP server)</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">App</div>
+          <div class="stat-label">Cloud or local (Miro, browser, files)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide slide--light" id="slide-7">
+
+    <div>
+      <h2>Cloud &amp; Local</h2>
+      <div class="two-col">
+        <div>
+          <h3>Cloud Apps</h3>
+        </div>
+        <div>
+          <h3>Local Apps</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide slide--primary" id="slide-8">
+
+    <div class="centered">
+      <span class="badge">Tier 1</span>
+      <h1>EXPLORER</h1>
+      <p class="subtitle">What can it do?</p>
+    </div>
+  </section>
+
+  <section class="slide slide--secondary" id="slide-9">
+
+    <div class="centered">
+      <span class="badge">Tier 2</span>
+      <h1>PRACTITIONER</h1>
+      <p class="subtitle">What can it do for me?</p>
+    </div>
+  </section>
+
+  <section class="slide slide--dark" id="slide-10">
+
+    <div>
+      <h2>Setup: 3 Steps</h2>
+      <p>Add to claude_desktop_config.json, restart Claude Desktop</p>
+      <pre><code class="language-json">{
+  &quot;mcpServers&quot;: {
+    &quot;gleif&quot;: {
+      &quot;command&quot;: &quot;/path/to/gleif-mcp-server&quot;
+    }
+  }
+}</code></pre>
+    </div>
+  </section>
+
+  <section class="slide slide--light" id="slide-11">
+
+    <div>
+      <h2>Prompt with Intent</h2>
+      <p>Be specific about which app to use:</p>
+      <ul>
+        <li>&quot;Use the wiki server to search for authentication docs&quot;</li>
+        <li>&quot;Create a Miro sticky note saying Review API design&quot;</li>
+        <li>&quot;Use Playwright to open the login page and take a screenshot&quot;</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="slide slide--muted" id="slide-12">
+
+    <div class="centered">
+      <h2>Capabilities Vary</h2>
+      <div class="stats-row">
+        <div class="stat">
+          <div class="stat-value">4</div>
+          <div class="stat-label">GLEIF tools</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">38</div>
+          <div class="stat-label">ProductPlan tools</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">77</div>
+          <div class="stat-label">Miro tools</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide slide--accent" id="slide-13">
+
+    <div class="centered">
+      <span class="badge">Tier 3</span>
+      <h1>ARCHITECT</h1>
+      <p class="subtitle">What can I make it do?</p>
+    </div>
+  </section>
+
+  <section class="slide slide--light" id="slide-14">
+
+    <div>
+      <h2>4 Servers in December 2024</h2>
+      <div class="task-grid">
+        <div class="task-card">
+          <div class="task-number">01</div>
+          <div class="task-title">Dec 4: ProductPlan</div>
+          <div class="task-description">First attempt. Learned the SDK.</div>
+        </div>
+        <div class="task-card">
+          <div class="task-number">02</div>
+          <div class="task-title">Dec 10: MediaWiki</div>
+          <div class="task-description">Added auth, rate limiting.</div>
+        </div>
+        <div class="task-card">
+          <div class="task-number">03</div>
+          <div class="task-title">Dec 20: Miro</div>
+          <div class="task-description">77 tools, bulk operations.</div>
+        </div>
+        <div class="task-card">
+          <div class="task-number">04</div>
+          <div class="task-title">Dec 31: GLEIF</div>
+          <div class="task-description">Minimal, focused, production-ready.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide slide--dark" id="slide-15">
+
+    <div>
+      <h2>Server Structure</h2>
+      <p>All my servers follow this pattern</p>
+      <pre><code class="language-text">server/
+├── main.go           <span <span class="code-keyword">class</span>=<span <span class="code-keyword">class</span>="code-string">"code-comment"</span>># Entry point</span>
+├── tools/
+│   ├── definitions.go  <span <span class="code-keyword">class</span>=<span <span class="code-keyword">class</span>="code-string">"code-comment"</span>># Tool schemas</span>
+│   └── handlers.go     <span <span class="code-keyword">class</span>=<span <span class="code-keyword">class</span>="code-string">"code-comment"</span>># Tool logic</span>
+├── client/
+│   └── client.go       <span <span class="code-keyword">class</span>=<span <span class="code-keyword">class</span>="code-string">"code-comment"</span>># API client</span>
+└── cache/
+    └── cache.go        <span <span class="code-keyword">class</span>=<span <span class="code-keyword">class</span>="code-string">"code-comment"</span>># Response caching</span></code></pre>
+    </div>
+  </section>
+
+  <section class="slide slide--primary" id="slide-16">
+
+    <div class="centered">
+      <blockquote>Hi Olga, impressive work on Miro MCP, thank you!
+        <cite>Andrey Khusid, CEO at Miro</cite>
+      </blockquote>
+    </div>
+  </section>
+
+  <section class="slide slide--light" id="slide-17">
+
+    <div class="centered">
+      <blockquote>Since getting this up &amp; running it has been SO useful in making everyday work more efficient.
+        <cite>Jenny Felldin, Colleague at Tietoevry</cite>
+      </blockquote>
+    </div>
+  </section>
+
+  <section class="slide slide--dark" id="slide-18">
+
+    <div class="centered">
+      <h2>Key Takeaways</h2>
+      <div class="stats-row">
+        <div class="stat">
+          <div class="stat-value">Explorer</div>
+          <div class="stat-label">MCP lets AI act, not just answer</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">Practitioner</div>
+          <div class="stat-label">Download, configure, restart</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">Architect</div>
+          <div class="stat-label">Start small, enable others</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide slide--muted" id="slide-19">
+
+    <div>
+      <h2>Resources</h2>
+      <ul>
+        <li>MCP Spec: modelcontextprotocol.io</li>
+        <li>Go SDK: github.com/modelcontextprotocol/go-sdk</li>
+        <li>GLEIF (simplest): github.com/olgasafonova/gleif-mcp-server</li>
+        <li>Miro (complete): github.com/olgasafonova/miro-mcp-server</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="slide slide--primary" id="slide-20">
+
+    <div class="centered">
+      <span class="badge">substack.com/@olgasafonova</span>
+      <h1>Questions?</h1>
+      <p class="subtitle">linkedin.com/in/olgasafonova</p>
+    </div>
+  </section>
+  </main>
+
+  <script>
+    // Slide navigation and animation system
+    (function() {
+      const slides = document.querySelectorAll('.slide');
+      const navDots = document.querySelectorAll('.nav-dot');
+      let currentSlide = 0;
+      let isVideoMode = window.location.search.includes('video=true');
+
+      // Intersection Observer for scroll-based navigation
+      const observer = new IntersectionObserver((entries) => {
+        if (isVideoMode) return;
+
+        entries.forEach(entry => {
+          if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+            const index = Array.from(slides).indexOf(entry.target);
+            setActiveSlide(index);
+            animateSlide(entry.target);
+          }
+        });
+      }, {
+        threshold: [0.5],
+        rootMargin: '-10% 0px'
+      });
+
+      slides.forEach(slide => observer.observe(slide));
+
+      // Set active nav dot
+      function setActiveSlide(index) {
+        currentSlide = index;
+        navDots.forEach((dot, i) => {
+          dot.classList.toggle('active', i === index);
+        });
+      }
+
+      // Nav dot click handlers
+      navDots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+          slides[index].scrollIntoView({ behavior: 'smooth' });
+        });
+      });
+
+      // Keyboard navigation
+      document.addEventListener('keydown', (e) => {
+        switch(e.key) {
+          case 'ArrowDown':
+          case 'ArrowRight':
+          case 'PageDown':
+          case ' ':
+            e.preventDefault();
+            if (currentSlide < slides.length - 1) {
+              slides[currentSlide + 1].scrollIntoView({ behavior: 'smooth' });
+            }
+            break;
+          case 'ArrowUp':
+          case 'ArrowLeft':
+          case 'PageUp':
+            e.preventDefault();
+            if (currentSlide > 0) {
+              slides[currentSlide - 1].scrollIntoView({ behavior: 'smooth' });
+            }
+            break;
+          case 'Home':
+            e.preventDefault();
+            slides[0].scrollIntoView({ behavior: 'smooth' });
+            break;
+          case 'End':
+            e.preventDefault();
+            slides[slides.length - 1].scrollIntoView({ behavior: 'smooth' });
+            break;
+          case 'r':
+          case 'R':
+            animateSlide(slides[currentSlide], true);
+            break;
+        }
+      });
+
+      // Slide animations using Anime.js
+      function animateSlide(slide, replay = false) {
+        const elements = slide.querySelectorAll('.animate');
+        if (elements.length === 0) return;
+
+        // Reset if replay
+        if (replay) {
+          elements.forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = '';
+          });
+        }
+
+        // Animate headings
+        const headings = slide.querySelectorAll('h1, h2, h3');
+        anime({
+          targets: headings,
+          opacity: [0, 1],
+          translateY: [30, 0],
+          duration: 600,
+          easing: 'easeOutQuart',
+          delay: anime.stagger(100)
+        });
+
+        // Animate paragraphs and lists
+        const textContent = slide.querySelectorAll('p, li');
+        anime({
+          targets: textContent,
+          opacity: [0, 1],
+          translateY: [20, 0],
+          duration: 500,
+          easing: 'easeOutQuart',
+          delay: anime.stagger(50, { start: 300 })
+        });
+
+        // Animate cards
+        const cards = slide.querySelectorAll('.card, .task-card, .box');
+        anime({
+          targets: cards,
+          opacity: [0, 1],
+          scale: [0.95, 1],
+          duration: 400,
+          easing: 'easeOutQuart',
+          delay: anime.stagger(100, { start: 200 })
+        });
+
+        // Animate stats
+        const statValues = slide.querySelectorAll('.stat-value');
+        statValues.forEach(stat => {
+          const finalValue = stat.textContent;
+          const numericValue = parseFloat(finalValue.replace(/[^0-9.-]/g, ''));
+          const prefix = finalValue.match(/^[^0-9]*/)[0] || '';
+          const suffix = finalValue.match(/[^0-9]*$/)[0] || '';
+
+          if (!isNaN(numericValue)) {
+            anime({
+              targets: stat,
+              innerHTML: [0, numericValue],
+              round: numericValue % 1 === 0 ? 1 : 10,
+              duration: 1500,
+              easing: 'easeOutExpo',
+              delay: 400,
+              update: function(anim) {
+                const val = Math.round(anim.animations[0].currentValue * 10) / 10;
+                stat.textContent = prefix + val + suffix;
+              },
+              complete: function() {
+                stat.textContent = finalValue;
+              }
+            });
+          }
+        });
+
+        // Animate images
+        const images = slide.querySelectorAll('.image-container');
+        anime({
+          targets: images,
+          opacity: [0, 1],
+          scale: [0.98, 1],
+          duration: 600,
+          easing: 'easeOutQuart',
+          delay: 200
+        });
+
+        // Animate code blocks
+        const codeBlocks = slide.querySelectorAll('pre');
+        anime({
+          targets: codeBlocks,
+          opacity: [0, 1],
+          translateX: [-20, 0],
+          duration: 500,
+          easing: 'easeOutQuart',
+          delay: 300
+        });
+      }
+
+      // Video mode auto-scroll
+      if (isVideoMode) {
+        const duration = parseInt(new URLSearchParams(window.location.search).get('duration')) || 5000;
+        let slideIndex = 0;
+
+        function nextSlide() {
+          if (slideIndex < slides.length) {
+            slides[slideIndex].scrollIntoView({ behavior: 'smooth' });
+            setActiveSlide(slideIndex);
+            animateSlide(slides[slideIndex]);
+            slideIndex++;
+            setTimeout(nextSlide, duration);
+          }
+        }
+
+        // Start after fonts load
+        document.fonts.ready.then(() => {
+          setTimeout(nextSlide, 1000);
+        });
+      }
+
+      // Initial animation for first slide
+      if (!isVideoMode) {
+        document.fonts.ready.then(() => {
+          setActiveSlide(0);
+          animateSlide(slides[0]);
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
