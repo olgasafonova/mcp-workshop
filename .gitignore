@@ -1,1 +1,13 @@
+# Dependencies
+node_modules/
+.venv/
+
+# OS files
 .DS_Store
+
+# Temp/cache
+*.log
+.cache/
+
+# Playwright temp
+.playwright-mcp/

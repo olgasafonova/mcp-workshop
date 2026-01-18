@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Color Scheme Options</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f0f0f0;
+      padding: 40px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      justify-content: center;
+      font-family: 'Inter', sans-serif;
+    }
+
+    h2 {
+      width: 100%;
+      text-align: center;
+      font-size: 24px;
+      color: #333;
+      margin-bottom: 0;
+    }
+
+    .slide {
+      width: 540px;
+      height: 675px;
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+      border-radius: 8px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+    }
+
+    /* Option A: Electric Blue */
+    .option-a {
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      padding: 48px;
+    }
+
+    .option-a .badge {
+      background: #0066FF;
+      color: white;
+      font-weight: 600;
+      font-size: 11px;
+      padding: 6px 16px;
+      border-radius: 100px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      width: fit-content;
+      margin-bottom: 32px;
+    }
+
+    .option-a h1 {
+      font-weight: 800;
+      font-size: 42px;
+      color: #111;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+
+    .option-a h1 span {
+      color: #0066FF;
+    }
+
+    .option-a .subtitle {
+      font-size: 18px;
+      color: #666;
+      margin-bottom: 32px;
+      line-height: 1.5;
+    }
+
+    .option-a .hosts {
+      font-size: 13px;
+      color: #888;
+      margin-top: auto;
+      padding-top: 24px;
+      border-top: 1px solid #eee;
+    }
+
+    .option-a .hosts strong {
+      color: #555;
+    }
+
+    .option-a .visual {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 200px;
+      height: 200px;
+      background: linear-gradient(135deg, #0066FF 0%, #00AAFF 100%);
+      border-radius: 100px 0 0 0;
+      opacity: 0.1;
+    }
+
+    /* Option B: Coral Warm */
+    .option-b {
+      background: #FAFAFA;
+      display: flex;
+      flex-direction: column;
+      padding: 48px;
+    }
+
+    .option-b .badge {
+      background: #FF6B4A;
+      color: white;
+      font-weight: 600;
+      font-size: 11px;
+      padding: 6px 16px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      width: fit-content;
+      margin-bottom: 32px;
+    }
+
+    .option-b h1 {
+      font-weight: 800;
+      font-size: 42px;
+      color: #1a1a1a;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+
+    .option-b h1 span {
+      color: #FF6B4A;
+    }
+
+    .option-b .subtitle {
+      font-size: 18px;
+      color: #555;
+      margin-bottom: 32px;
+      line-height: 1.5;
+    }
+
+    .option-b .hosts {
+      font-size: 13px;
+      color: #888;
+      margin-top: auto;
+      padding-top: 24px;
+      border-top: 1px solid #e5e5e5;
+    }
+
+    .option-b .hosts strong {
+      color: #555;
+    }
+
+    .option-b .visual {
+      position: absolute;
+      top: 32px;
+      right: 32px;
+      width: 80px;
+      height: 80px;
+      border: 4px solid #FF6B4A;
+      border-radius: 50%;
+      opacity: 0.3;
+    }
+
+    .option-b .visual::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 40px;
+      height: 40px;
+      background: #FF6B4A;
+      border-radius: 50%;
+      opacity: 0.5;
+    }
+
+    /* Option C: Teal Tech */
+    .option-c {
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      padding: 48px;
+      border-left: 6px solid #00B4A0;
+    }
+
+    .option-c .badge {
+      background: #E6F7F5;
+      color: #00806F;
+      font-weight: 600;
+      font-size: 11px;
+      padding: 6px 16px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      width: fit-content;
+      margin-bottom: 32px;
+    }
+
+    .option-c h1 {
+      font-weight: 800;
+      font-size: 42px;
+      color: #1a1a1a;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+
+    .option-c h1 span {
+      color: #00B4A0;
+    }
+
+    .option-c .subtitle {
+      font-size: 18px;
+      color: #555;
+      margin-bottom: 32px;
+      line-height: 1.5;
+    }
+
+    .option-c .hosts {
+      font-size: 13px;
+      color: #888;
+      margin-top: auto;
+      padding-top: 24px;
+      border-top: 1px solid #eee;
+    }
+
+    .option-c .hosts strong {
+      color: #555;
+    }
+
+    .label {
+      text-align: center;
+      margin-top: 16px;
+      font-size: 14px;
+      color: #666;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Pick a color scheme</h2>
+
+<!-- Option A: Electric Blue -->
+<div>
+  <div class="slide option-a">
+    <div class="badge">Workshop</div>
+    <h1>MCP: From Explorer <span>to Builder</span></h1>
+    <p class="subtitle">Learn how to connect AI assistants to your apps. Set up your first server in 10 minutes.</p>
+    <p class="hosts">Hosted by <strong>Women in Product Nordics</strong> & <strong>TechWomen Copenhagen</strong></p>
+    <div class="visual"></div>
+  </div>
+  <p class="label">A: Electric Blue</p>
+</div>
+
+<!-- Option B: Coral Warm -->
+<div>
+  <div class="slide option-b">
+    <div class="badge">Workshop</div>
+    <h1>MCP: From Explorer <span>to Builder</span></h1>
+    <p class="subtitle">Learn how to connect AI assistants to your apps. Set up your first server in 10 minutes.</p>
+    <p class="hosts">Hosted by <strong>Women in Product Nordics</strong> & <strong>TechWomen Copenhagen</strong></p>
+    <div class="visual"></div>
+  </div>
+  <p class="label">B: Coral Warm</p>
+</div>
+
+<!-- Option C: Teal Tech -->
+<div>
+  <div class="slide option-c">
+    <div class="badge">Workshop</div>
+    <h1>MCP: From Explorer <span>to Builder</span></h1>
+    <p class="subtitle">Learn how to connect AI assistants to your apps. Set up your first server in 10 minutes.</p>
+    <p class="hosts">Hosted by <strong>Women in Product Nordics</strong> & <strong>TechWomen Copenhagen</strong></p>
+  </div>
+  <p class="label">C: Teal Tech</p>
+</div>
+
+</body>
+</html>

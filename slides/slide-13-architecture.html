@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1920, height=1080">
+  <title>Slide 13 - Architecture</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=JetBrains+Mono:wght@400;500&display=swap');
+
+    body {
+      width: 1920px;
+      height: 1080px;
+      font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      background: #FAFAFA;
+      color: #1A1A1A;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .slide {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      grid-template-columns: 80px 1fr 1fr 80px;
+      grid-template-rows: 80px auto 1fr 80px;
+      padding: 0;
+    }
+
+    .logo {
+      position: absolute;
+      top: 64px;
+      right: 80px;
+      z-index: 100;
+    }
+
+    .logo img {
+      height: 64px;
+      width: 64px;
+      display: block;
+    }
+
+    .tier-badge {
+      position: absolute;
+      top: 80px;
+      left: 80px;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #888;
+    }
+
+    .header {
+      grid-column: 2 / 4;
+      grid-row: 2 / 3;
+      padding-top: 80px;
+      padding-bottom: 32px;
+    }
+
+    .section-label {
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #E53935;
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      font-size: 72px;
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+
+    .content {
+      grid-column: 2 / 4;
+      grid-row: 3 / 4;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+      padding-bottom: 80px;
+    }
+
+    .code-block {
+      background: #1A1A1A;
+      color: #FAFAFA;
+      padding: 32px;
+      font-family: 'JetBrains Mono', 'SF Mono', monospace;
+      font-size: 24px;
+      line-height: 1.8;
+    }
+
+    .code-block .folder {
+      color: #E53935;
+    }
+
+    .code-block .file {
+      color: #FAFAFA;
+    }
+
+    .code-block .comment {
+      color: #666;
+    }
+
+    .explanations {
+      padding-top: 16px;
+    }
+
+    .explanation-item {
+      margin-bottom: 32px;
+    }
+
+    .explanation-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: #E53935;
+      margin-bottom: 8px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .explanation-text {
+      font-size: 28px;
+      color: #444;
+      line-height: 1.4;
+    }
+
+    .slide-number {
+      position: absolute;
+      bottom: 80px;
+      right: 80px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="logo">
+      <img src="mcp-icon.svg" alt="MCP">
+    </div>
+    <div class="tier-badge">Tier 3 / Architect</div>
+
+    <div class="header">
+      <div class="section-label">Structure</div>
+      <h1>Architecture Overview</h1>
+    </div>
+
+    <div class="content">
+      <div class="code-block">
+        <span class="folder">server/</span><br>
+        ├── <span class="file">main.go</span> <span class="comment"># Entry point</span><br>
+        ├── <span class="folder">tools/</span><br>
+        │   ├── <span class="file">definitions.go</span> <span class="comment"># What can it do?</span><br>
+        │   └── <span class="file">handlers.go</span> <span class="comment"># How does it do it?</span><br>
+        └── <span class="folder">client/</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;└── <span class="file">client.go</span> <span class="comment"># API client</span>
+      </div>
+
+      <div class="explanations">
+        <div class="explanation-item">
+          <div class="explanation-title">main.go</div>
+          <div class="explanation-text">Entry point. Registers tools, starts the server.</div>
+        </div>
+        <div class="explanation-item">
+          <div class="explanation-title">definitions.go</div>
+          <div class="explanation-text">Tool names, descriptions, parameter schemas. What Claude sees.</div>
+        </div>
+        <div class="explanation-item">
+          <div class="explanation-title">handlers.go</div>
+          <div class="explanation-text">The actual implementation. Calls APIs, processes data, returns results.</div>
+        </div>
+        <div class="explanation-item">
+          <div class="explanation-title">client.go</div>
+          <div class="explanation-text">HTTP client with auth, rate limiting, caching. Talks to the real API.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-number">15</div>
+  </div>
+</body>
+</html>

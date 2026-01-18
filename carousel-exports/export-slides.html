@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MCP Workshop Carousel - Export</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #1a1a1a;
+      width: 1080px;
+      height: 1350px;
+      overflow: hidden;
+    }
+
+    .slide {
+      width: 1080px;
+      height: 1350px;
+      background: #f5f0e6;
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: none;
+    }
+
+    .slide.active {
+      display: flex;
+    }
+
+    /* Slide 1: Title */
+    .slide-1 {
+      background: linear-gradient(180deg, #2c1810 0%, #1a0f0a 100%);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 80px;
+    }
+
+    .slide-1 .badge {
+      background: #c9a227;
+      color: #1a0f0a;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 24px;
+      padding: 12px 32px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 48px;
+    }
+
+    .slide-1 h1 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 96px;
+      color: #f5f0e6;
+      text-align: center;
+      line-height: 1.1;
+      margin-bottom: 32px;
+    }
+
+    .slide-1 h1 span {
+      display: block;
+      font-size: 72px;
+      color: #c9a227;
+    }
+
+    .slide-1 .subtitle {
+      font-family: 'Inter', sans-serif;
+      font-size: 32px;
+      color: #a89070;
+      text-align: center;
+      max-width: 800px;
+      line-height: 1.5;
+      margin-bottom: 64px;
+    }
+
+    .slide-1 .image-container {
+      width: 600px;
+      height: 400px;
+      border: 8px solid #c9a227;
+      overflow: hidden;
+    }
+
+    .slide-1 .image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Content slides */
+    .content-slide {
+      flex-direction: column;
+    }
+
+    .content-slide .image-area {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .content-slide .image-area img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .content-slide .text-area {
+      background: #1a0f0a;
+      padding: 56px 64px;
+      min-height: 320px;
+      position: relative;
+    }
+
+    .content-slide .slide-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 120px;
+      font-weight: 900;
+      color: #c9a227;
+      opacity: 0.3;
+      position: absolute;
+      top: -20px;
+      right: 40px;
+      line-height: 1;
+    }
+
+    .content-slide h2 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 56px;
+      color: #f5f0e6;
+      margin-bottom: 24px;
+      line-height: 1.2;
+    }
+
+    .content-slide p {
+      font-family: 'Inter', sans-serif;
+      font-size: 28px;
+      color: #a89070;
+      line-height: 1.6;
+    }
+
+    .content-slide .caption {
+      font-family: 'Inter', sans-serif;
+      font-size: 18px;
+      color: #706050;
+      margin-top: 16px;
+      font-style: italic;
+    }
+
+    /* CTA slide */
+    .slide-cta {
+      background: #1a0f0a;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 80px;
+      text-align: center;
+    }
+
+    .slide-cta h2 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 72px;
+      color: #f5f0e6;
+      margin-bottom: 24px;
+      line-height: 1.2;
+    }
+
+    .slide-cta .subtext {
+      font-family: 'Inter', sans-serif;
+      font-size: 32px;
+      color: #a89070;
+      margin-bottom: 64px;
+      max-width: 700px;
+      line-height: 1.5;
+    }
+
+    .slide-cta .qr-container {
+      background: #f5f0e6;
+      padding: 32px;
+      border-radius: 16px;
+      margin-bottom: 48px;
+    }
+
+    .slide-cta .qr-container img {
+      width: 280px;
+      height: 280px;
+    }
+
+    .slide-cta .handle {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 36px;
+      color: #c9a227;
+      margin-bottom: 16px;
+    }
+
+    .slide-cta .name {
+      font-family: 'Playfair Display', serif;
+      font-size: 48px;
+      color: #f5f0e6;
+      margin-bottom: 48px;
+    }
+
+    .slide-cta .topics {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .slide-cta .topic {
+      background: #2c1810;
+      border: 2px solid #c9a227;
+      color: #c9a227;
+      font-family: 'Inter', sans-serif;
+      font-size: 20px;
+      padding: 12px 24px;
+      border-radius: 100px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Slide 1: Title -->
+<div class="slide slide-1 active" id="slide-1">
+  <div class="badge">Live Workshop</div>
+  <h1>
+    When AI Learned<br>
+    <span>to Take Action</span>
+  </h1>
+  <p class="subtitle">A medieval guide to Model Context Protocol</p>
+  <div class="image-container">
+    <img src="/Users/olgasafonova/Documents/obsidian-home/Attachments/mcp-workshop-carousel/IMG20230723164145.jpg" alt="Pied Piper">
+  </div>
+</div>
+
+<!-- Slide 2: The Problem -->
+<div class="slide content-slide" id="slide-2">
+  <div class="image-area">
+    <img src="/Users/olgasafonova/Documents/obsidian-home/Attachments/mcp-workshop-carousel/scribe-dunstan.png" alt="Scribe at work">
+  </div>
+  <div class="text-area">
+    <span class="slide-number">01</span>
+    <h2>AI That Knows Everything</h2>
+    <p>It reads. It writes. It summarizes. It answers questions with confidence.</p>
+    <p class="caption">But it can't actually DO anything.</p>
+  </div>
+</div>
+
+<!-- Slide 3: The Trickster -->
+<div class="slide content-slide" id="slide-3">
+  <div class="image-area">
+    <img src="/Users/olgasafonova/Documents/obsidian-home/Attachments/mcp-workshop-carousel/fox-preaching-birds.png" alt="Fox preaching to birds">
+  </div>
+  <div class="text-area">
+    <span class="slide-number">02</span>
+    <h2>Confident. Wrong. Useless.</h2>
+    <p>RAG retrieves information. But retrieval isn't action. You still have to do the work yourself.</p>
+    <p class="caption">The fox preaches. The birds listen. Nothing changes.</p>
+  </div>
+</div>
+
+<!-- Slide 4: First Attempts -->
+<div class="slide content-slide" id="slide-4">
+  <div class="image-area">
+    <img src="/Users/olgasafonova/Documents/obsidian-home/Attachments/mcp-workshop-carousel/knight-vs-snail-gorleston.png" alt="Knight vs Snail">
+  </div>
+  <div class="text-area">
+    <span class="slide-number">03</span>
+    <h2>Then Came MCP</h2>
+    <p>Model Context Protocol. A standard way for AI to take action in your apps.</p>
+    <p class="caption">First config attempt. The snail is winning.</p>
+  </div>
+</div>
+
+<!-- Slide 5: World Changed -->
+<div class="slide content-slide" id="slide-5">
+  <div class="image-area">
+    <img src="/Users/olgasafonova/Documents/obsidian-home/Attachments/mcp-workshop-carousel/killer-rabbits-sequence.png" alt="Killer rabbits">
+  </div>
+  <div class="text-area">
+    <span class="slide-number">04</span>
+    <h2>The World Turned Upside Down</h2>
+    <p>AI that creates Miro boards. Updates your roadmap. Controls your browser. Edits your files.</p>
+    <p class="caption">Day 1 after AI learned to take action.</p>
+  </div>
+</div>
+
+<!-- Slide 6: Victory -->
+<div class="slide content-slide" id="slide-6">
+  <div class="image-area">
+    <img src="/Users/olgasafonova/Documents/obsidian-home/Attachments/mcp-workshop-carousel/PXL_20250222_135101173.jpg" alt="St Michael slaying dragon">
+  </div>
+  <div class="text-area">
+    <span class="slide-number">05</span>
+    <h2>config.json Accepted</h2>
+    <p>From explorer to user to builder. Four servers built. 150+ tools. Real workflows automated.</p>
+    <p class="caption">It's alive.</p>
+  </div>
+</div>
+
+<!-- Slide 7: CTA -->
+<div class="slide slide-cta" id="slide-7">
+  <h2>Join the Workshop</h2>
+  <p class="subtext">Hosted by Women in Product Nordics &amp; TechWomen Copenhagen</p>
+  <div class="qr-container">
+    <img src="/Users/olgasafonova/Documents/obsidian-home/Attachments/mcp-workshop-carousel/linkedin-qr.png" alt="LinkedIn QR Code">
+  </div>
+  <p class="handle">Follow for event details</p>
+  <p class="name">Olga Safonova</p>
+  <div class="topics">
+    <span class="topic">1 Hour</span>
+    <span class="topic">All Levels</span>
+    <span class="topic">Hands-on</span>
+  </div>
+</div>
+
+</body>
+</html>

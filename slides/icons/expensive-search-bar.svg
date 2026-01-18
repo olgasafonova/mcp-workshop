@@ -1,0 +1,11 @@
+<svg width="400" height="100" viewBox="0 0 400 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Search bar pill shape -->
+  <rect x="4" y="4" width="392" height="92" rx="46" stroke="#1A1A1A" stroke-width="3" fill="none"/>
+
+  <!-- Magnifying glass -->
+  <circle cx="60" cy="50" r="18" stroke="#888" stroke-width="3" fill="none"/>
+  <line x1="73" y1="63" x2="88" y2="78" stroke="#888" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Dollar signs in red -->
+  <text x="200" y="62" font-family="Inter, sans-serif" font-size="36" font-weight="700" fill="#E53935" text-anchor="middle" letter-spacing="0.1em">$$$</text>
+</svg>

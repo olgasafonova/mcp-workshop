@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1920, height=1080">
+  <title>Slide 19 - Thank You</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
+
+    body {
+      width: 1920px;
+      height: 1080px;
+      font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      background: #1A1A1A;
+      color: #FAFAFA;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .slide {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 80px;
+    }
+
+    .logo {
+      position: absolute;
+      top: 64px;
+      right: 80px;
+      z-index: 100;
+    }
+
+    .logo img {
+      height: 64px;
+      width: 64px;
+      display: block;
+      filter: invert(1);
+    }
+
+    .thank-you {
+      font-size: 96px;
+      font-weight: 900;
+      color: #E53935;
+      margin-bottom: 64px;
+    }
+
+    .presenter {
+      font-size: 48px;
+      font-weight: 900;
+      color: #FAFAFA;
+      margin-bottom: 12px;
+    }
+
+    .presenter-title {
+      font-size: 28px;
+      color: #666;
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .section-label {
+      font-size: 48px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: #555;
+      margin-bottom: 40px;
+    }
+
+    .qr-section {
+      display: flex;
+      gap: 64px;
+    }
+
+    .qr-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .qr-code {
+      width: 220px;
+      height: 220px;
+      background: #FAFAFA;
+      padding: 16px;
+      border-radius: 8px;
+    }
+
+    .qr-code img {
+      width: 100%;
+      height: 100%;
+    }
+
+    .qr-label {
+      font-size: 18px;
+      font-weight: 600;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .qr-logo {
+      height: 40px;
+      width: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .qr-logo img {
+      height: 40px;
+      width: 40px;
+      object-fit: contain;
+    }
+
+    .qr-logo img.substack {
+      height: 56px;
+      width: 56px;
+    }
+
+    .slide-number {
+      position: absolute;
+      bottom: 80px;
+      right: 80px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="logo">
+      <img src="mcp-icon.svg" alt="MCP">
+    </div>
+
+    <div class="thank-you">Thank you!</div>
+
+    <div class="presenter">Olga Safonova</div>
+    <div class="presenter-title">AI Product Leader ⁞ Building AI tools in Go<br>Ex-Workday, Siteimprove, Saxo Bank ⁞ Keynote Speaker</div>
+
+    <div class="section-label">Connect</div>
+
+    <div class="qr-section">
+      <div class="qr-item">
+        <div class="qr-code">
+          <img src="icons/qr-linkedin.svg" alt="LinkedIn QR">
+        </div>
+        <div class="qr-label">LinkedIn</div>
+        <div class="qr-logo"><img src="icons/logo-linkedin.png" alt="LinkedIn"></div>
+      </div>
+      <div class="qr-item">
+        <div class="qr-code">
+          <img src="icons/qr-github.svg" alt="GitHub QR">
+        </div>
+        <div class="qr-label">GitHub</div>
+        <div class="qr-logo"><img src="icons/logo-github.png" alt="GitHub"></div>
+      </div>
+      <div class="qr-item">
+        <div class="qr-code">
+          <img src="icons/qr-substack.svg" alt="Substack QR">
+        </div>
+        <div class="qr-label">Substack</div>
+        <div class="qr-logo"><img src="icons/logo-substack.png" alt="Substack" class="substack"></div>
+      </div>
+    </div>
+
+    <div class="slide-number">21</div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,8 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Key shape -->
+  <circle cx="20" cy="32" r="12" stroke="#1A1A1A" stroke-width="3" fill="none"/>
+  <circle cx="20" cy="32" r="5" fill="#E53935"/>
+  <line x1="32" y1="32" x2="56" y2="32" stroke="#1A1A1A" stroke-width="3" stroke-linecap="round"/>
+  <line x1="48" y1="32" x2="48" y2="42" stroke="#1A1A1A" stroke-width="3" stroke-linecap="round"/>
+  <line x1="54" y1="32" x2="54" y2="38" stroke="#1A1A1A" stroke-width="3" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,9 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Memory/storage drawer with items -->
+  <rect x="8" y="12" width="48" height="40" rx="2" stroke="#1A1A1A" stroke-width="3" fill="none"/>
+  <line x1="8" y1="28" x2="56" y2="28" stroke="#1A1A1A" stroke-width="2"/>
+  <line x1="8" y1="44" x2="56" y2="44" stroke="#1A1A1A" stroke-width="2"/>
+  <rect x="16" y="17" width="12" height="6" fill="#E53935" rx="1"/>
+  <rect x="32" y="17" width="8" height="6" fill="#E53935" rx="1"/>
+  <rect x="16" y="33" width="16" height="6" fill="#888" rx="1"/>
+</svg>

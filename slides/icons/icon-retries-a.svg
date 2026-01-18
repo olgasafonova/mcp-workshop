@@ -1,0 +1,7 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Double refresh arrows -->
+  <path d="M44 20 A16 16 0 1 1 20 32" stroke="#1A1A1A" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M44 20 L38 14 L38 26 Z" fill="#E53935"/>
+  <path d="M20 44 A16 16 0 1 1 44 32" stroke="#1A1A1A" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M20 44 L26 50 L26 38 Z" fill="#E53935"/>
+</svg>

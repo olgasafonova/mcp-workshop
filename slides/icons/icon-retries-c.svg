@@ -1,0 +1,10 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Bouncing ball - resilience -->
+  <circle cx="16" cy="20" r="6" fill="#888"/>
+  <circle cx="36" cy="28" r="6" fill="#888"/>
+  <circle cx="52" cy="16" r="6" fill="#E53935"/>
+  <!-- Bounce path -->
+  <path d="M16 26 Q26 48 36 34 Q46 48 52 22" stroke="#1A1A1A" stroke-width="2" fill="none" stroke-dasharray="4 3"/>
+  <!-- Ground line -->
+  <line x1="8" y1="52" x2="56" y2="52" stroke="#1A1A1A" stroke-width="3" stroke-linecap="round"/>
+</svg>

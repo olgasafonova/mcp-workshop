@@ -1,0 +1,37 @@
+Try these prompts in Claude Desktop after setting up GLEIF:
+
+BASIC LOOKUP
+------------
+Look up Microsoft's LEI using GLEIF
+
+Find the LEI for Tesla
+
+What company has LEI HWUPKR0MPOU8FGXBT394?
+
+
+COMPANY SEARCH
+--------------
+Search for Apple Inc in GLEIF
+
+Find all companies named "Deutsche Bank"
+
+
+VALIDATION
+----------
+Is LEI 5493006MHB84DD0ZWV18 valid?
+
+Validate this LEI: HWUPKR0MPOU8FGXBT394
+
+
+CORPORATE STRUCTURE
+-------------------
+Who is Apple's ultimate parent company according to GLEIF?
+
+Show me Tesla's corporate ownership structure
+
+
+FINANCIAL IDENTIFIERS
+---------------------
+Find the LEI for BIC code DEUTDEFF
+
+What company issued ISIN US0378331005?

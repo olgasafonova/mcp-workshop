@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Retries Icon Options</title>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #FAFAFA;
+      padding: 60px;
+    }
+    h1 {
+      font-size: 36px;
+      font-weight: 900;
+      margin-bottom: 40px;
+    }
+    .options {
+      display: grid;
+      grid-template-columns: repeat(3, 200px);
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+    .option {
+      text-align: center;
+    }
+    .option img {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 16px;
+    }
+    .option-label {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .option-desc {
+      font-size: 14px;
+      color: #666;
+    }
+    .current {
+      background: #f0f0f0;
+      padding: 20px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Retries Icon Options</h1>
+
+  <div class="options">
+    <div class="option current">
+      <img src="icons/icon-retries.svg" alt="Current">
+      <div class="option-label">Current</div>
+      <div class="option-desc">Circular arrow with 2x</div>
+    </div>
+
+    <div class="option">
+      <img src="icons/icon-retries-a.svg" alt="Option A">
+      <div class="option-label">Option A</div>
+      <div class="option-desc">Double refresh arrows</div>
+    </div>
+
+    <div class="option">
+      <img src="icons/icon-retries-b.svg" alt="Option B">
+      <div class="option-label">Option B</div>
+      <div class="option-desc">Multiple arrows + wait dots</div>
+    </div>
+  </div>
+
+  <div class="options">
+    <div class="option">
+      <img src="icons/icon-retries-c.svg" alt="Option C">
+      <div class="option-label">Option C</div>
+      <div class="option-desc">Bouncing ball (resilience)</div>
+    </div>
+
+    <div class="option">
+      <img src="icons/icon-retries-d.svg" alt="Option D">
+      <div class="option-label">Option D</div>
+      <div class="option-desc">X X then checkmark</div>
+    </div>
+
+    <div class="option">
+      <img src="icons/icon-retries-e.svg" alt="Option E">
+      <div class="option-label">Option E</div>
+      <div class="option-desc">Loop with counter</div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,14 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- X marks then checkmark - failed attempts then success -->
+  <line x1="10" y1="28" x2="18" y2="36" stroke="#888" stroke-width="3" stroke-linecap="round"/>
+  <line x1="18" y1="28" x2="10" y2="36" stroke="#888" stroke-width="3" stroke-linecap="round"/>
+
+  <line x1="28" y1="28" x2="36" y2="36" stroke="#888" stroke-width="3" stroke-linecap="round"/>
+  <line x1="36" y1="28" x2="28" y2="36" stroke="#888" stroke-width="3" stroke-linecap="round"/>
+
+  <path d="M46 32 L50 36 L58 24" stroke="#E53935" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Arrow connecting attempts -->
+  <path d="M14 48 L50 48" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round"/>
+  <path d="M46 44 L50 48 L46 52" stroke="#1A1A1A" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

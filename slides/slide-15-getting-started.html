@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1920, height=1080">
+  <title>Slide 15 - Getting Started</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
+
+    body {
+      width: 1920px;
+      height: 1080px;
+      font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      background: #FAFAFA;
+      color: #1A1A1A;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .slide {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      grid-template-columns: 80px 1fr 80px;
+      grid-template-rows: 80px auto 1fr 80px;
+      padding: 0;
+    }
+
+    .logo {
+      position: absolute;
+      top: 64px;
+      right: 80px;
+      z-index: 100;
+    }
+
+    .logo img {
+      height: 64px;
+      width: 64px;
+      display: block;
+    }
+
+    .tier-badge {
+      position: absolute;
+      top: 80px;
+      left: 80px;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #888;
+    }
+
+    .header {
+      grid-column: 2 / 3;
+      grid-row: 2 / 3;
+      padding-top: 80px;
+      padding-bottom: 48px;
+    }
+
+    .section-label {
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #E53935;
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      font-size: 72px;
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+
+    .content {
+      grid-column: 2 / 3;
+      grid-row: 3 / 4;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 48px;
+      align-items: start;
+      padding-bottom: 80px;
+    }
+
+    .option {
+      background: #fff;
+      border: 2px solid #E0E0E0;
+      padding: 32px;
+      min-height: 280px;
+    }
+
+    .option.recommended {
+      border-color: #E53935;
+      border-width: 3px;
+    }
+
+    .option-badge {
+      display: inline-block;
+      background: #E53935;
+      color: white;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      margin-bottom: 16px;
+    }
+
+    .option-title {
+      font-size: 32px;
+      font-weight: 900;
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+    }
+
+    .option-subtitle {
+      font-size: 20px;
+      color: #888;
+      margin-bottom: 24px;
+    }
+
+    .option-desc {
+      font-size: 24px;
+      color: #444;
+      line-height: 1.5;
+    }
+
+    .sdk-note {
+      grid-column: 1 / -1;
+      font-size: 24px;
+      color: #444;
+      margin-top: -40px;
+      line-height: 1.6;
+    }
+
+    .sdk-note strong {
+      font-weight: 700;
+      color: #1A1A1A;
+    }
+
+    .sdk-note .accent {
+      color: #E53935;
+      font-weight: 700;
+    }
+
+    .sdk-note .subheading {
+      font-weight: 700;
+      margin-top: 16px;
+      display: block;
+    }
+
+    .sdk-note .subheading.accent {
+      color: #E53935;
+    }
+
+    .sdk-note .closing {
+      font-size: 42px;
+      font-weight: 900;
+      color: #1A1A1A;
+      margin-top: 20px;
+      display: block;
+    }
+
+    .sdk-note .closing .accent {
+      color: #E53935;
+    }
+
+    .slide-number {
+      position: absolute;
+      bottom: 80px;
+      right: 80px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="logo">
+      <img src="mcp-icon.svg" alt="MCP">
+    </div>
+    <div class="tier-badge">Tier 3 / Architect</div>
+
+    <div class="header">
+      <div class="section-label">Your First MCP Server</div>
+      <h1>Getting Started</h1>
+    </div>
+
+    <div class="content">
+      <div class="option recommended">
+        <div class="option-badge">Recommended</div>
+        <div class="option-title">Fork GLEIF MCP</div>
+        <div class="option-subtitle">Simplest, 12 tools</div>
+        <div class="option-desc">Clean, minimal codebase. Read-only API. Perfect for learning the MCP SDK patterns.</div>
+      </div>
+
+      <div class="option">
+        <div class="option-title">Fork Miro MCP</div>
+        <div class="option-subtitle">Most advanced, 77 tools</div>
+        <div class="option-desc">Full CRUD operations, OAuth flow, bulk actions. Reference for complex servers.</div>
+      </div>
+
+      <div class="option">
+        <div class="option-title">Start fresh</div>
+        <div class="option-subtitle">Go, Python, or TypeScript SDK</div>
+        <div class="option-desc">Official SDKs handle protocol. You focus on tools. Docs at modelcontextprotocol.io</div>
+      </div>
+
+      <div class="sdk-note">
+        <strong>Python</strong> and <strong>TypeScript</strong> are the most popular—most tutorials and the AI/ML community use them.
+        <span class="subheading accent">Why Go?</span>
+        Single binary, no runtime dependencies, starts instantly, cross-compiles for any OS. Python needs a runtime, TypeScript needs Node. <span class="accent">Go</span> just works.
+        <span class="closing">You decide what works for <span class="accent">you</span></span>
+      </div>
+    </div>
+
+    <div class="slide-number">17</div>
+  </div>
+</body>
+</html>

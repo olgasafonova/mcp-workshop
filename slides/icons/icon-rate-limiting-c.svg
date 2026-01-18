@@ -1,0 +1,11 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Water tap/faucet with drips - controlled flow -->
+  <rect x="24" y="8" width="16" height="24" rx="2" stroke="#1A1A1A" stroke-width="3" fill="none"/>
+  <path d="M24 20 L16 20 L16 28 L24 28" stroke="#1A1A1A" stroke-width="3" fill="none" stroke-linejoin="round"/>
+  <circle cx="18" cy="24" r="3" fill="#E53935"/>
+  <!-- Spout -->
+  <path d="M28 32 L28 40 L36 40 L36 32" stroke="#1A1A1A" stroke-width="3" fill="none"/>
+  <!-- Controlled drips -->
+  <circle cx="32" cy="48" r="3" fill="#E53935"/>
+  <circle cx="32" cy="58" r="2" fill="#E53935" opacity="0.5"/>
+</svg>

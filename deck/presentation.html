@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MCP Workshop: From Explorer to Builder</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+    :root {
+      --bg-dark: #1a0f0a;
+      --bg-medium: #2c1810;
+      --text-light: #f5f0e6;
+      --text-muted: #a89070;
+      --text-subtle: #706050;
+      --accent: #c9a227;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-snap-type: y mandatory;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg-dark);
+      color: var(--text-light);
+      font-family: 'Inter', sans-serif;
+    }
+
+    .slide {
+      width: 100vw;
+      height: 100vh;
+      padding: 64px 80px;
+      display: flex;
+      flex-direction: column;
+      scroll-snap-align: start;
+      position: relative;
+    }
+
+    /* Title Slide */
+    .slide-title {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: linear-gradient(180deg, var(--bg-medium) 0%, var(--bg-dark) 100%);
+    }
+
+    .slide-title .badge {
+      background: var(--accent);
+      color: var(--bg-dark);
+      font-weight: 600;
+      font-size: 14px;
+      padding: 8px 24px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 32px;
+    }
+
+    .slide-title h1 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 72px;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .slide-title h1 span {
+      color: var(--accent);
+    }
+
+    .slide-title .subtitle {
+      font-size: 28px;
+      color: var(--text-muted);
+      margin-bottom: 48px;
+    }
+
+    .slide-title .hosts {
+      font-size: 18px;
+      color: var(--text-subtle);
+    }
+
+    .slide-title .hosts strong {
+      color: var(--text-muted);
+    }
+
+    /* Section Header Slides */
+    .slide-section {
+      justify-content: center;
+      background: var(--accent);
+    }
+
+    .slide-section .tier {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 18px;
+      color: var(--bg-dark);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin-bottom: 16px;
+      opacity: 0.7;
+    }
+
+    .slide-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 80px;
+      color: var(--bg-dark);
+      line-height: 1.1;
+    }
+
+    .slide-section .level {
+      font-size: 24px;
+      color: var(--bg-dark);
+      margin-top: 24px;
+      opacity: 0.8;
+    }
+
+    /* Content Slides */
+    .slide-content h2 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 56px;
+      margin-bottom: 48px;
+      line-height: 1.2;
+    }
+
+    .slide-content h2 span {
+      color: var(--accent);
+    }
+
+    .slide-content .body {
+      font-size: 28px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      max-width: 900px;
+    }
+
+    .slide-content .body strong {
+      color: var(--text-light);
+    }
+
+    .slide-content .quote {
+      font-family: 'Playfair Display', serif;
+      font-size: 48px;
+      font-style: italic;
+      color: var(--text-light);
+      border-left: 4px solid var(--accent);
+      padding-left: 32px;
+      margin: 32px 0;
+      max-width: 800px;
+    }
+
+    /* Two Column Layout */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      flex: 1;
+      align-items: center;
+    }
+
+    .col h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 36px;
+      margin-bottom: 24px;
+      color: var(--accent);
+    }
+
+    .col p {
+      font-size: 24px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .col ul {
+      list-style: none;
+      font-size: 22px;
+    }
+
+    .col ul li {
+      color: var(--text-muted);
+      padding: 12px 0;
+      border-bottom: 1px solid var(--bg-medium);
+    }
+
+    .col ul li:last-child {
+      border-bottom: none;
+    }
+
+    /* Diagram */
+    .diagram {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      margin-top: 48px;
+    }
+
+    .diagram-box {
+      background: var(--bg-medium);
+      border: 2px solid var(--accent);
+      padding: 32px 48px;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .diagram-box h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      color: var(--text-light);
+      margin-bottom: 8px;
+    }
+
+    .diagram-box p {
+      font-size: 16px;
+      color: var(--text-muted);
+    }
+
+    .diagram-arrow {
+      font-size: 32px;
+      color: var(--accent);
+    }
+
+    /* Code Block */
+    .code-block {
+      background: var(--bg-medium);
+      border-radius: 8px;
+      padding: 32px;
+      margin-top: 32px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 18px;
+      line-height: 1.8;
+      overflow-x: auto;
+    }
+
+    .code-block .comment {
+      color: var(--text-subtle);
+    }
+
+    .code-block .keyword {
+      color: var(--accent);
+    }
+
+    .code-block .string {
+      color: #98c379;
+    }
+
+    /* Table */
+    .table-container {
+      margin-top: 48px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 22px;
+    }
+
+    th {
+      text-align: left;
+      padding: 16px 24px;
+      background: var(--bg-medium);
+      color: var(--accent);
+      font-weight: 600;
+      border-bottom: 2px solid var(--accent);
+    }
+
+    td {
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--bg-medium);
+      color: var(--text-muted);
+    }
+
+    /* Stats */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+      margin-top: 48px;
+    }
+
+    .stat {
+      text-align: center;
+      padding: 32px;
+      background: var(--bg-medium);
+      border-radius: 8px;
+    }
+
+    .stat .value {
+      font-family: 'Playfair Display', serif;
+      font-size: 48px;
+      font-weight: 900;
+      color: var(--accent);
+    }
+
+    .stat .label {
+      font-size: 18px;
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
+
+    /* Timeline */
+    .timeline {
+      display: flex;
+      align-items: flex-start;
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .timeline-item {
+      flex: 1;
+      position: relative;
+      padding-top: 24px;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: -24px;
+      height: 4px;
+      background: var(--accent);
+    }
+
+    .timeline-item:last-child::before {
+      right: 0;
+    }
+
+    .timeline-item .date {
+      font-size: 14px;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .timeline-item h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      color: var(--text-light);
+      margin-bottom: 8px;
+    }
+
+    .timeline-item p {
+      font-size: 16px;
+      color: var(--text-muted);
+    }
+
+    /* Bullets */
+    .bullets {
+      list-style: none;
+      margin-top: 32px;
+    }
+
+    .bullets li {
+      font-size: 24px;
+      color: var(--text-muted);
+      padding: 16px 0;
+      padding-left: 32px;
+      position: relative;
+    }
+
+    .bullets li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 24px;
+      width: 12px;
+      height: 12px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    .bullets li strong {
+      color: var(--text-light);
+    }
+
+    /* CTA Slide */
+    .slide-cta {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .slide-cta h2 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 64px;
+      margin-bottom: 24px;
+    }
+
+    .slide-cta .subtext {
+      font-size: 28px;
+      color: var(--text-muted);
+      margin-bottom: 48px;
+    }
+
+    .qr-container {
+      background: var(--text-light);
+      padding: 24px;
+      border-radius: 12px;
+      margin-bottom: 32px;
+    }
+
+    .qr-container img {
+      width: 200px;
+      height: 200px;
+    }
+
+    .links {
+      font-size: 20px;
+      color: var(--text-muted);
+    }
+
+    .links a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    /* Slide number */
+    .slide-number {
+      position: absolute;
+      bottom: 32px;
+      right: 48px;
+      font-size: 14px;
+      color: var(--text-subtle);
+    }
+
+    /* Arrow indicators */
+    .arrow-in, .arrow-out {
+      font-size: 64px;
+      margin: 16px 0;
+    }
+
+    .arrow-in {
+      color: var(--text-subtle);
+    }
+
+    .arrow-out {
+      color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+
+<!-- Slide 1: Title -->
+<div class="slide slide-title">
+  <div class="badge">Live Workshop</div>
+  <h1>When AI Learned<br><span>to Take Action</span></h1>
+  <p class="subtitle">MCP Workshop: From Explorer to Builder</p>
+  <p class="hosts">Hosted by <strong>Women in Product Nordics</strong> & <strong>TechWomen Copenhagen</strong></p>
+  <span class="slide-number">1 / 19</span>
+</div>
+
+<!-- Slide 2: Tier 1 Header -->
+<div class="slide slide-section">
+  <p class="tier">Tier 1</p>
+  <h2>What are MCPs</h2>
+  <p class="level">Level: Explorer — No technical background needed</p>
+  <span class="slide-number" style="color: var(--bg-dark);">2 / 19</span>
+</div>
+
+<!-- Slide 3: The Problem -->
+<div class="slide slide-content">
+  <h2>The Problem</h2>
+  <p class="quote">"AI that knows everything and does nothing is an expensive search bar."</p>
+  <div class="body">
+    <p>Most AI assistants today can answer questions, summarize documents, generate text.</p>
+    <p style="margin-top: 24px;">But they can't create a Miro board. Update your roadmap. Control your browser. Edit files on your machine.</p>
+  </div>
+  <span class="slide-number">3 / 19</span>
+</div>
+
+<!-- Slide 4: RAG vs MCP -->
+<div class="slide slide-content">
+  <h2>RAG vs <span>MCP</span></h2>
+  <div class="two-col">
+    <div class="col" style="text-align: center;">
+      <h3>RAG</h3>
+      <p class="arrow-in">↓ ↓ ↓</p>
+      <p><strong>Retrieval-Augmented Generation</strong></p>
+      <p style="margin-top: 16px;">Information flows IN to AI</p>
+      <p style="margin-top: 8px; color: var(--text-subtle);">AI retrieves and reads</p>
+      <p style="margin-top: 8px; color: var(--text-subtle);">Still just a smarter search bar</p>
+    </div>
+    <div class="col" style="text-align: center;">
+      <h3>MCP</h3>
+      <p class="arrow-out">↑ ↑ ↑</p>
+      <p><strong>Model Context Protocol</strong></p>
+      <p style="margin-top: 16px;">Commands flow OUT from AI</p>
+      <p style="margin-top: 8px; color: var(--text-light);">AI takes action in your apps</p>
+      <p style="margin-top: 8px; color: var(--text-light);">Becomes a collaborator</p>
+    </div>
+  </div>
+  <span class="slide-number">4 / 19</span>
+</div>
+
+<!-- Slide 5: USB Analogy -->
+<div class="slide slide-content">
+  <h2>What is <span>MCP</span>?</h2>
+  <div class="body">
+    <p>MCP is a <strong>protocol</strong>: a shared language that lets AI assistants talk to your apps.</p>
+  </div>
+  <div class="two-col" style="margin-top: 48px;">
+    <div class="col">
+      <h3>Before USB</h3>
+      <p>Every device had its own cable</p>
+      <p style="margin-top: 16px; color: var(--text-subtle);">Printers, cameras, phones, keyboards: all different connectors</p>
+    </div>
+    <div class="col">
+      <h3>After USB</h3>
+      <p>One standard, everything connects</p>
+      <p style="margin-top: 16px; color: var(--text-light);">MCP is USB for AI</p>
+    </div>
+  </div>
+  <span class="slide-number">5 / 19</span>
+</div>
+
+<!-- Slide 6: Three Parts -->
+<div class="slide slide-content">
+  <h2>The Three Parts</h2>
+  <div class="diagram">
+    <div class="diagram-box">
+      <h4>Client</h4>
+      <p>The AI assistant</p>
+      <p style="color: var(--text-subtle); font-size: 14px; margin-top: 8px;">Claude, ChatGPT, Cursor</p>
+    </div>
+    <span class="diagram-arrow">→</span>
+    <div class="diagram-box">
+      <h4>Server</h4>
+      <p>The bridge</p>
+      <p style="color: var(--text-subtle); font-size: 14px; margin-top: 8px;">Miro MCP, Playwright MCP</p>
+    </div>
+    <span class="diagram-arrow">→</span>
+    <div class="diagram-box">
+      <h4>App</h4>
+      <p>The service</p>
+      <p style="color: var(--text-subtle); font-size: 14px; margin-top: 8px;">Miro, browser, filesystem</p>
+    </div>
+  </div>
+  <p class="body" style="margin-top: 48px; text-align: center;">Apps can be in the <strong>cloud</strong> OR on <strong>your machine</strong>.</p>
+  <span class="slide-number">6 / 19</span>
+</div>
+
+<!-- Slide 7: Cloud vs Local -->
+<div class="slide slide-content">
+  <h2>Cloud vs <span>Local</span></h2>
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Cloud Apps</th>
+          <th>Local Apps</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Miro</td>
+          <td>Your browser (Playwright)</td>
+        </tr>
+        <tr>
+          <td>ProductPlan</td>
+          <td>Files on your machine</td>
+        </tr>
+        <tr>
+          <td>GLEIF API</td>
+          <td>Local git repos</td>
+        </tr>
+        <tr>
+          <td>MediaWiki</td>
+          <td>SQLite databases</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="body" style="margin-top: 48px;">Same protocol. Different targets. MCP doesn't care where the app lives.</p>
+  <span class="slide-number">7 / 19</span>
+</div>
+
+<!-- Slide 7: Tier 2 Header -->
+<div class="slide slide-section">
+  <p class="tier">Tier 2</p>
+  <h2>How to Use MCPs</h2>
+  <p class="level">Level: User — Can follow instructions, no coding required</p>
+  <span class="slide-number" style="color: var(--bg-dark);">8 / 19</span>
+</div>
+
+<!-- Slide 8: Setup Demo -->
+<div class="slide slide-content">
+  <h2>Setup in <span>4 Steps</span></h2>
+  <div class="stats-grid">
+    <div class="stat">
+      <div class="value">1</div>
+      <div class="label">Download the binary</div>
+    </div>
+    <div class="stat">
+      <div class="value">2</div>
+      <div class="label">Add to config file</div>
+    </div>
+    <div class="stat">
+      <div class="value">3</div>
+      <div class="label">Restart Claude Desktop</div>
+    </div>
+    <div class="stat">
+      <div class="value">4</div>
+      <div class="label">Test with a command</div>
+    </div>
+  </div>
+  <div class="code-block" style="margin-top: 48px;">
+    <span class="comment">// claude_desktop_config.json</span><br>
+    {<br>
+    &nbsp;&nbsp;<span class="string">"mcpServers"</span>: {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"gleif"</span>: {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"command"</span>: <span class="string">"/path/to/gleif-mcp-server"</span><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+    &nbsp;&nbsp;}<br>
+    }
+  </div>
+  <span class="slide-number">9 / 19</span>
+</div>
+
+<!-- Slide 9: Demo 1 Cloud -->
+<div class="slide slide-content">
+  <h2>Demo: <span>Cloud App</span></h2>
+  <div class="body">
+    <p><strong>GLEIF</strong> — Global Legal Entity Identifier Foundation</p>
+    <p style="margin-top: 24px; color: var(--text-subtle);">No authentication needed. Just download and run.</p>
+  </div>
+  <div class="code-block" style="margin-top: 48px; font-size: 24px;">
+    <span class="comment"># You say:</span><br>
+    "Look up Apple's LEI number"<br><br>
+    <span class="comment"># AI returns:</span><br>
+    <span class="string">HWUPKR0MPOU8FGXBT394</span><br>
+    Apple Inc., Cupertino, CA
+  </div>
+  <p class="body" style="margin-top: 32px;">Data flows from cloud API → AI → you</p>
+  <span class="slide-number">10 / 19</span>
+</div>
+
+<!-- Slide 10: Demo 2 Local -->
+<div class="slide slide-content">
+  <h2>Demo: <span>Local App</span></h2>
+  <div class="body">
+    <p><strong>Playwright</strong> — Browser automation on YOUR machine</p>
+  </div>
+  <div class="code-block" style="margin-top: 48px; font-size: 24px;">
+    <span class="comment"># You say:</span><br>
+    "Open a browser and navigate to miro.com"<br>
+    <span class="keyword">→ Browser window opens on your machine</span><br><br>
+    "Take a screenshot"<br>
+    <span class="keyword">→ Screenshot captured and displayed</span><br><br>
+    "Click the Sign In button"<br>
+    <span class="keyword">→ Visible click happens in real-time</span>
+  </div>
+  <p class="body" style="margin-top: 32px;">AI controls something right here. No cloud involved.</p>
+  <span class="slide-number">11 / 19</span>
+</div>
+
+<!-- Slide 11: Effective Prompting -->
+<div class="slide slide-content">
+  <h2>Using MCP <span>Effectively</span></h2>
+  <div class="body">
+    <p>You're giving AI a toolbox. Be specific about which app to use.</p>
+  </div>
+  <div class="two-col" style="margin-top: 48px;">
+    <div class="col">
+      <h3 style="color: #98c379;">Good Prompts</h3>
+      <ul>
+        <li>"Use the wiki server to search for authentication docs"</li>
+        <li>"Create a Miro sticky note saying 'Review API design'"</li>
+        <li>"Use Playwright to take a screenshot of the login page"</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h3 style="color: #e06c75;">Less Effective</h3>
+      <ul>
+        <li>"Find some info about authentication"</li>
+        <li>"Make a note somewhere"</li>
+        <li>"Open a website"</li>
+      </ul>
+    </div>
+  </div>
+  <span class="slide-number">12 / 19</span>
+</div>
+
+<!-- Slide 12: Tier 3 Header -->
+<div class="slide slide-section">
+  <p class="tier">Tier 3</p>
+  <h2>How to Build MCPs</h2>
+  <p class="level">Level: Builder — Developers who want to create their own</p>
+  <span class="slide-number" style="color: var(--bg-dark);">13 / 19</span>
+</div>
+
+<!-- Slide 13: Evolution Story -->
+<div class="slide slide-content">
+  <h2>My <span>Journey</span></h2>
+  <p class="body">Four servers built in December 2024:</p>
+  <div class="timeline">
+    <div class="timeline-item">
+      <p class="date">Dec 4</p>
+      <h4>ProductPlan</h4>
+      <p>First attempt. Learned the SDK, basic tool patterns.</p>
+    </div>
+    <div class="timeline-item">
+      <p class="date">Dec 10</p>
+      <h4>MediaWiki</h4>
+      <p>Added complexity: auth, rate limiting, markdown conversion.</p>
+    </div>
+    <div class="timeline-item">
+      <p class="date">Dec 20</p>
+      <h4>Miro</h4>
+      <p>Scaled up: 77 tools, diagrams, bulk operations.</p>
+    </div>
+    <div class="timeline-item">
+      <p class="date">Dec 31</p>
+      <h4>GLEIF</h4>
+      <p>Refined: minimal, focused, production-ready.</p>
+    </div>
+  </div>
+  <span class="slide-number">14 / 19</span>
+</div>
+
+<!-- Slide 14: Architecture -->
+<div class="slide slide-content">
+  <h2>Architecture <span>Overview</span></h2>
+  <div class="code-block" style="font-size: 20px;">
+    server/<br>
+    ├── main.go&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># Entry point, server setup</span><br>
+    ├── tools/<br>
+    │&nbsp;&nbsp;&nbsp;├── definitions.go&nbsp;&nbsp;<span class="comment"># What can it do? (schemas)</span><br>
+    │&nbsp;&nbsp;&nbsp;└── handlers.go&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># How does it do it? (logic)</span><br>
+    └── client/<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;└── client.go&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># API client for the app</span>
+  </div>
+  <div class="body" style="margin-top: 48px;">
+    <p><strong>The minimal server needs:</strong></p>
+    <p style="margin-top: 16px;">1. A tool definition (what can it do?)</p>
+    <p>2. A handler (how does it do it?)</p>
+    <p>3. A client (how does it talk to the app?)</p>
+  </div>
+  <span class="slide-number">15 / 19</span>
+</div>
+
+<!-- Slide 15: Production Patterns -->
+<div class="slide slide-content">
+  <h2>Production <span>Patterns</span></h2>
+  <p class="body">What I added as servers matured:</p>
+  <div class="stats-grid" style="margin-top: 32px;">
+    <div class="stat">
+      <div class="value" style="font-size: 36px;">Error Handling</div>
+      <div class="label">Retries, graceful failures</div>
+    </div>
+    <div class="stat">
+      <div class="value" style="font-size: 36px;">Auth Flows</div>
+      <div class="label">OAuth, API keys, tokens</div>
+    </div>
+    <div class="stat">
+      <div class="value" style="font-size: 36px;">Caching</div>
+      <div class="label">15-min TTL for boards</div>
+    </div>
+    <div class="stat">
+      <div class="value" style="font-size: 36px;">Rate Limiting</div>
+      <div class="label">Respect API limits</div>
+    </div>
+  </div>
+  <div class="body" style="margin-top: 48px;">
+    <p><strong>From Miro (77 tools):</strong> Bulk operations, complex schemas, audit logging</p>
+    <p style="margin-top: 16px;"><strong>From GLEIF (4 tools):</strong> Clean separation, minimal dependencies, no auth</p>
+  </div>
+  <span class="slide-number">16 / 19</span>
+</div>
+
+<!-- Slide 16: Getting Started -->
+<div class="slide slide-content">
+  <h2>Getting <span>Started</span></h2>
+  <div class="two-col">
+    <div class="col">
+      <h3>Fork an Existing Server</h3>
+      <ul>
+        <li><strong>GLEIF</strong> — Simplest (no auth, 4 tools)</li>
+        <li><strong>Miro</strong> — Most complete (all patterns, 77 tools)</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h3>Use an SDK</h3>
+      <div class="code-block" style="font-size: 16px; padding: 16px;">
+        <span class="comment"># Go</span><br>
+        go get github.com/modelcontextprotocol/go-sdk<br><br>
+        <span class="comment"># TypeScript</span><br>
+        npm install @modelcontextprotocol/sdk
+      </div>
+    </div>
+  </div>
+  <div class="body" style="margin-top: 48px; text-align: center;">
+    <p><strong>MCP Specification:</strong> modelcontextprotocol.io</p>
+  </div>
+  <span class="slide-number">17 / 19</span>
+</div>
+
+<!-- Slide 17: Key Takeaways -->
+<div class="slide slide-content">
+  <h2>Key <span>Takeaways</span></h2>
+  <ul class="bullets">
+    <li><strong>Explorers:</strong> MCP lets AI take action, not just answer questions. It works with cloud apps AND local apps on your machine.</li>
+    <li><strong>Users:</strong> Setup is simple. Download, configure, restart. Start with GLEIF (cloud, no auth) or Playwright (local, visual).</li>
+    <li><strong>Builders:</strong> Start small. My first server had 5 tools. By the fourth, I had production patterns figured out.</li>
+  </ul>
+  <span class="slide-number">18 / 19</span>
+</div>
+
+<!-- Slide 19: Resources & Connect -->
+<div class="slide slide-cta">
+  <h2>Thank You</h2>
+  <p class="subtext">Connect for more AI engineering content</p>
+  <div class="qr-container">
+    <img src="/Users/olgasafonova/Documents/obsidian-home/Attachments/mcp-workshop-carousel/linkedin-qr.png" alt="LinkedIn QR">
+  </div>
+  <div class="links">
+    <p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/olgasafonova">linkedin.com/in/olgasafonova</a></p>
+    <p style="margin-top: 8px;"><strong>Substack:</strong> <a href="https://substack.com/@olgasafonova">substack.com/@olgasafonova</a></p>
+    <p style="margin-top: 24px; color: var(--text-subtle);">Olga Safonova</p>
+  </div>
+  <span class="slide-number">19 / 19</span>
+</div>
+
+</body>
+</html>

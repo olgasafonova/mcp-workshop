@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1920, height=1080">
+  <title>Slide 17 - Real Value</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
+
+    body {
+      width: 1920px;
+      height: 1080px;
+      font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      background: #FAFAFA;
+      color: #1A1A1A;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .slide {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      grid-template-columns: 80px 1fr 1.2fr 80px;
+      grid-template-rows: 80px 1fr 80px;
+      padding: 0;
+    }
+
+    .logo {
+      position: absolute;
+      top: 64px;
+      right: 80px;
+      z-index: 100;
+    }
+
+    .logo img {
+      height: 64px;
+      width: 64px;
+      display: block;
+    }
+
+    .main-testimonial {
+      grid-column: 2 / 3;
+      grid-row: 2 / 3;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding-right: 64px;
+      padding-top: 80px;
+    }
+
+    .section-label {
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #E53935;
+      margin-bottom: 24px;
+      min-height: 19px;
+    }
+
+    .miro-quotes {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .miro-quote {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .miro-quote:nth-child(2) {
+      margin-top: 9px;
+    }
+
+    .miro-quote-text {
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+    }
+
+    .miro-quote-text .highlight {
+      color: #E53935;
+    }
+
+    .miro-quote-person {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .miro-quote-name {
+      font-size: 20px;
+      font-weight: 700;
+      color: #555;
+    }
+
+    .miro-quote-title {
+      font-size: 20px;
+      color: #888;
+    }
+
+    .miro-quote-project {
+      background: #F0F0F0;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 18px;
+      font-weight: 600;
+      color: #666;
+    }
+
+    .miro-quote-photo {
+      width: 320px;
+      border-radius: 8px;
+      background: #E0E0E0;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+
+    .miro-quote:nth-child(2) .miro-quote-photo {
+      width: 387px;
+    }
+
+    .miro-quote-photo img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .context {
+      font-size: 14px;
+      color: #888;
+      margin-top: 16px;
+    }
+
+    .context strong {
+      color: #1A1A1A;
+      font-weight: 600;
+    }
+
+    .company-logo {
+      height: 48px;
+      margin-bottom: 24px;
+    }
+
+    .company-logo img {
+      height: 100%;
+      width: auto;
+    }
+
+    .colleague-feedback {
+      grid-column: 3 / 4;
+      grid-row: 2 / 3;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding-left: 64px;
+      padding-top: 80px;
+      border-left: 1px solid #E0E0E0;
+    }
+
+    .quotes-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .quote-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .quote-text {
+      font-size: 28px;
+      font-weight: 600;
+      line-height: 1.3;
+      color: #1A1A1A;
+    }
+
+    .quote-text .highlight {
+      color: #E53935;
+    }
+
+    .quote-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 20px;
+      color: #888;
+    }
+
+    .quote-name {
+      font-weight: 700;
+      color: #555;
+    }
+
+    .quote-role {
+      color: #888;
+    }
+
+    .quote-project {
+      background: #F0F0F0;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 18px;
+      font-weight: 600;
+      color: #666;
+    }
+
+    .slide-number {
+      position: absolute;
+      bottom: 80px;
+      right: 80px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="logo">
+      <img src="mcp-icon.svg" alt="MCP">
+    </div>
+
+    <div class="main-testimonial">
+      <div class="section-label">Real Value</div>
+      <div class="company-logo">
+        <img src="miro-logo.png" alt="Miro">
+      </div>
+      <div class="miro-quotes">
+        <div class="miro-quote">
+          <div class="miro-quote-text">"Impressive work on <span class="highlight">Miro MCP</span>, thank you!"</div>
+          <div class="miro-quote-person">
+            <span class="miro-quote-name">Andrey Khusid</span>
+            <span class="miro-quote-title">CEO & Co-founder, Miro</span>
+            <span class="miro-quote-project">Miro MCP</span>
+          </div>
+          <div class="miro-quote-photo">
+            <img src="andrey-khusid-linkedin.png" alt="Andrey Khusid">
+          </div>
+        </div>
+
+        <div class="miro-quote">
+          <div class="miro-quote-text">"You are <span class="highlight">ahead of the curve</span>. Look for more Miro MCP announcements!"</div>
+          <div class="miro-quote-person">
+            <span class="miro-quote-name">David Ross</span>
+            <span class="miro-quote-title">Chief Product Evangelist, Miro</span>
+            <span class="miro-quote-project">Miro MCP</span>
+          </div>
+          <div class="miro-quote-photo">
+            <img src="david-ross-linkedin.png" alt="David Ross">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="colleague-feedback">
+      <div class="section-label">&nbsp;</div>
+      <div class="company-logo">
+        <img src="tieto-logo.svg" alt="Tieto">
+      </div>
+      <div class="quotes-list">
+        <div class="quote-item">
+          <div class="quote-text">"<span class="highlight">SO useful</span> in making everyday work more efficient"</div>
+          <div class="quote-meta">
+            <span class="quote-name">Jenny Felldin</span>
+            <span class="quote-role">Head of Product</span>
+            <span class="quote-project">ProductPlan MCP</span>
+          </div>
+        </div>
+
+        <div class="quote-item">
+          <div class="quote-text">"A <span class="highlight">golden nugget</span> to help sales with bid requirements"</div>
+          <div class="quote-meta">
+            <span class="quote-name">Jenny Felldin</span>
+            <span class="quote-role">Head of Product</span>
+            <span class="quote-project">MediaWiki MCP</span>
+          </div>
+        </div>
+
+        <div class="quote-item">
+          <div class="quote-text">"A <span class="highlight">golden opportunity</span> to strengthen our product positioning"</div>
+          <div class="quote-meta">
+            <span class="quote-name">Sandra Wallin</span>
+            <span class="quote-role">Head of Enablement</span>
+            <span class="quote-project">MediaWiki MCP</span>
+          </div>
+        </div>
+
+        <div class="quote-item">
+          <div class="quote-text">"This type of reports is <span class="highlight">really useful</span>"</div>
+          <div class="quote-meta">
+            <span class="quote-name">Sandra Wallin</span>
+            <span class="quote-role">Head of Enablement</span>
+            <span class="quote-project">MediaWiki MCP</span>
+          </div>
+        </div>
+
+        <div class="quote-item">
+          <div class="quote-text">"<span class="highlight">Nyttig verktøy</span>" — Glossary is very useful</div>
+          <div class="quote-meta">
+            <span class="quote-name">Per Borgersen</span>
+            <span class="quote-role">Delivery Manager</span>
+            <span class="quote-project">MediaWiki MCP</span>
+          </div>
+        </div>
+
+        <div class="quote-item">
+          <div class="quote-text">"This might be one of the <span class="highlight">best gifts ever</span>"</div>
+          <div class="quote-meta">
+            <span class="quote-name">Ari Räisänen</span>
+            <span class="quote-role">Lead Software Architect</span>
+            <span class="quote-project">MediaWiki MCP</span>
+          </div>
+        </div>
+
+        <div class="quote-item">
+          <div class="quote-text">"It works <span class="highlight">beautifully</span> 💪"</div>
+          <div class="quote-meta">
+            <span class="quote-name">Ari Räisänen</span>
+            <span class="quote-role">Lead Software Architect</span>
+            <span class="quote-project">MediaWiki MCP</span>
+          </div>
+        </div>
+
+        <div class="quote-item">
+          <div class="quote-text">"Design Team is <span class="highlight">super excited</span>"</div>
+          <div class="quote-meta">
+            <span class="quote-name">Aleksandra Bratek</span>
+            <span class="quote-role">UI Designer</span>
+            <span class="quote-project">MediaWiki + Miro MCP</span>
+          </div>
+        </div>
+
+        <div class="quote-item">
+          <div class="quote-text">"<span class="highlight">Love it!</span>"</div>
+          <div class="quote-meta">
+            <span class="quote-name">Morten Lerfald</span>
+            <span class="quote-role">Senior Business Developer</span>
+            <span class="quote-project">MediaWiki MCP</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-number">19</div>
+  </div>
+</body>
+</html>

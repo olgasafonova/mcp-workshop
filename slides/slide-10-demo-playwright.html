@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1920, height=1080">
+  <title>Slide 10 - Demo 2: Playwright</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
+
+    body {
+      width: 1920px;
+      height: 1080px;
+      font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      background: #FAFAFA;
+      color: #1A1A1A;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .slide {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      grid-template-columns: 80px 1fr 1fr 80px;
+      grid-template-rows: 80px auto 1fr 80px;
+      padding: 0;
+    }
+
+    .logo {
+      position: absolute;
+      top: 64px;
+      right: 80px;
+      z-index: 100;
+    }
+
+    .logo img {
+      height: 64px;
+      width: 64px;
+      display: block;
+    }
+
+    .tier-badge {
+      position: absolute;
+      top: 80px;
+      left: 80px;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #888;
+    }
+
+    .header {
+      grid-column: 2 / 4;
+      grid-row: 2 / 3;
+      padding-top: 80px;
+      padding-bottom: 32px;
+    }
+
+    .demo-badge {
+      display: inline-block;
+      background: #E53935;
+      color: white;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 8px 16px;
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      font-size: 72px;
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+
+    .demo-type {
+      font-size: 24px;
+      font-weight: 600;
+      color: #888;
+    }
+
+    .content {
+      grid-column: 2 / 4;
+      grid-row: 3 / 4;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+      padding-bottom: 80px;
+    }
+
+    .prompts {
+      padding-top: 16px;
+    }
+
+    .prompts-title {
+      font-size: 20px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #888;
+      margin-bottom: 24px;
+    }
+
+    .prompt {
+      background: #F0F0F0;
+      padding: 24px;
+      margin-bottom: 16px;
+      font-size: 24px;
+      font-weight: 500;
+      font-family: 'SF Mono', 'Consolas', monospace;
+      border-left: 4px solid #E53935;
+    }
+
+    .talking-points {
+      padding-top: 16px;
+    }
+
+    .points-title {
+      font-size: 20px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #888;
+      margin-bottom: 24px;
+    }
+
+    .point-list {
+      list-style: none;
+    }
+
+    .point-list li {
+      font-size: 28px;
+      font-weight: 400;
+      color: #333;
+      padding: 12px 0;
+      padding-left: 32px;
+      position: relative;
+    }
+
+    .point-list li::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: #E53935;
+      font-weight: 700;
+    }
+
+    .slide-number {
+      position: absolute;
+      bottom: 80px;
+      right: 80px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="logo">
+      <img src="mcp-icon.svg" alt="MCP">
+    </div>
+    <div class="tier-badge">Tier 2 / User</div>
+
+    <div class="header">
+      <div class="demo-badge">Demo 2</div>
+      <h1>Playwright</h1>
+      <div class="demo-type">Local App Pattern</div>
+    </div>
+
+    <div class="content">
+      <div class="prompts">
+        <div class="prompts-title">Live Prompts</div>
+        <div class="prompt">"Open a browser and go to producthunt.com"</div>
+        <div class="prompt">"Take a screenshot of the page"</div>
+      </div>
+
+      <div class="talking-points">
+        <div class="points-title">The Difference</div>
+        <ul class="point-list">
+          <li>Your browser, your machine</li>
+          <li>Navigate, fill forms, capture pages</li>
+          <li>Privacy: data stays on your machine</li>
+          <li>No API keys needed for local apps</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="slide-number">12</div>
+  </div>
+</body>
+</html>

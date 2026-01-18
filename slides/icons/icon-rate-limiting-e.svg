@@ -1,0 +1,8 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Hourglass - time/waiting -->
+  <path d="M16 8 L48 8 L48 12 L38 28 L38 36 L48 52 L48 56 L16 56 L16 52 L26 36 L26 28 L16 12 Z" stroke="#1A1A1A" stroke-width="3" fill="none" stroke-linejoin="round"/>
+  <!-- Sand -->
+  <path d="M22 12 L32 24 L42 12" stroke="#E53935" stroke-width="2" fill="none"/>
+  <circle cx="32" cy="32" r="2" fill="#E53935"/>
+  <path d="M26 52 L32 44 L38 52" fill="#E53935"/>
+</svg>

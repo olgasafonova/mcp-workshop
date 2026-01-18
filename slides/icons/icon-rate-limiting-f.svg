@@ -1,0 +1,7 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Pulse/heartbeat with controlled rhythm -->
+  <path d="M4 32 L16 32 L20 20 L28 44 L36 20 L44 44 L48 32 L60 32" stroke="#1A1A1A" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Pause indicator -->
+  <rect x="24" y="50" width="6" height="12" rx="1" fill="#E53935"/>
+  <rect x="34" y="50" width="6" height="12" rx="1" fill="#E53935"/>
+</svg>

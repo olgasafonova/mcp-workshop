@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1920, height=1080">
+  <title>Slide 08 - Tier 2 Intro</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
+
+    body {
+      width: 1920px;
+      height: 1080px;
+      font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      background: #1A1A1A;
+      color: #FAFAFA;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .slide {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      grid-template-columns: 80px 1fr 80px;
+      grid-template-rows: 80px 1fr 80px;
+      padding: 0;
+    }
+
+    .logo {
+      position: absolute;
+      top: 64px;
+      right: 80px;
+      z-index: 100;
+    }
+
+    .logo img {
+      height: 64px;
+      width: 64px;
+      display: block;
+      filter: invert(1);
+    }
+
+    .content {
+      grid-column: 2 / 3;
+      grid-row: 2 / 3;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-right: 200px;
+    }
+
+    .tier-badge {
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #888;
+      margin-bottom: 32px;
+    }
+
+    h1 {
+      font-size: 120px;
+      font-weight: 900;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      margin-bottom: 48px;
+    }
+
+    h1 .highlight {
+      color: #E53935;
+    }
+
+    .subtitle {
+      font-size: 32px;
+      font-weight: 400;
+      color: #AAA;
+      line-height: 1.4;
+      max-width: 800px;
+    }
+
+    .slide-number {
+      position: absolute;
+      bottom: 80px;
+      right: 80px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="logo">
+      <img src="mcp-icon.svg" alt="MCP">
+    </div>
+
+    <div class="content">
+      <div class="tier-badge">Tier 2 / User</div>
+      <h1>How to <span class="highlight">Use</span> MCPs</h1>
+      <p class="subtitle">
+        Can follow instructions, no coding required.<br>
+        Three live demos.
+      </p>
+    </div>
+
+    <div class="slide-number">08</div>
+  </div>
+</body>
+</html>

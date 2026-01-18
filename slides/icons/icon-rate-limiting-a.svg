@@ -1,0 +1,13 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Speedometer/gauge - controlled speed -->
+  <path d="M12 44 A24 24 0 1 1 52 44" stroke="#1A1A1A" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- Speed marks -->
+  <line x1="16" y1="36" x2="20" y2="38" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round"/>
+  <line x1="22" y1="24" x2="26" y2="27" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round"/>
+  <line x1="32" y1="20" x2="32" y2="24" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round"/>
+  <line x1="42" y1="24" x2="38" y2="27" stroke="#E53935" stroke-width="2" stroke-linecap="round"/>
+  <line x1="48" y1="36" x2="44" y2="38" stroke="#E53935" stroke-width="2" stroke-linecap="round"/>
+  <!-- Needle pointing to moderate -->
+  <line x1="32" y1="44" x2="26" y2="28" stroke="#E53935" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="32" cy="44" r="4" fill="#1A1A1A"/>
+</svg>

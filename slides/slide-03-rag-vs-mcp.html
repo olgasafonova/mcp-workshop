@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1920, height=1080">
+  <title>Slide 03 - RAG vs MCP</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
+
+    body {
+      width: 1920px;
+      height: 1080px;
+      font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      background: #FAFAFA;
+      color: #1A1A1A;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .slide {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      grid-template-columns: 80px 1fr 1fr 80px;
+      grid-template-rows: 80px auto 1fr 80px;
+      padding: 0;
+    }
+
+    .logo {
+      position: absolute;
+      top: 64px;
+      right: 80px;
+      z-index: 100;
+    }
+
+    .logo img {
+      height: 64px;
+      width: 64px;
+      display: block;
+    }
+
+    .tier-badge {
+      position: absolute;
+      top: 80px;
+      left: 80px;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #888;
+    }
+
+    .header {
+      grid-column: 2 / 4;
+      grid-row: 2 / 3;
+      padding-top: 80px;
+      padding-bottom: 48px;
+    }
+
+    .section-label {
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #E53935;
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      font-size: 72px;
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+
+    .comparison {
+      grid-column: 2 / 4;
+      grid-row: 3 / 4;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .side {
+      padding: 48px;
+      border-radius: 0;
+    }
+
+    .side-rag {
+      border-left: 8px solid #888;
+    }
+
+    .side-mcp {
+      border-left: 8px solid #E53935;
+    }
+
+    .side-icon {
+      width: 160px;
+      height: 160px;
+      margin-bottom: 32px;
+    }
+
+    .side h2 {
+      font-size: 48px;
+      font-weight: 900;
+      margin-bottom: 24px;
+      letter-spacing: -0.02em;
+    }
+
+    .side-rag h2 {
+      color: #888;
+    }
+
+    .side-mcp h2 {
+      color: #E53935;
+    }
+
+    .direction {
+      font-size: 32px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: #1A1A1A;
+    }
+
+    .direction .arrow {
+      font-size: 40px;
+    }
+
+    .side-rag .arrow {
+      color: #888;
+    }
+
+    .side-mcp .arrow {
+      color: #E53935;
+    }
+
+    .description {
+      font-size: 28px;
+      font-weight: 400;
+      color: #444;
+      line-height: 1.5;
+    }
+
+    .slide-number {
+      position: absolute;
+      bottom: 80px;
+      right: 80px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="logo">
+      <img src="mcp-icon.svg" alt="MCP">
+    </div>
+    <div class="tier-badge">Tier 1 / Explorer</div>
+
+    <div class="header">
+      <div class="section-label">The Distinction</div>
+      <h1>RAG vs MCP</h1>
+    </div>
+
+    <div class="comparison">
+      <div class="side side-rag">
+        <img src="icons/icon-rag.svg" alt="" class="side-icon">
+        <h2>RAG</h2>
+        <div class="direction">Information flows <span class="arrow">IN</span></div>
+        <p class="description">
+          Retrieval-Augmented Generation.<br>
+          AI pulls data from documents,<br>
+          databases, knowledge bases.<br><br>
+          <strong>Result:</strong> Better answers.
+        </p>
+      </div>
+
+      <div class="side side-mcp">
+        <img src="icons/icon-mcp.svg" alt="" class="side-icon">
+        <h2>MCP</h2>
+        <div class="direction">Commands flow <span class="arrow">OUT</span></div>
+        <p class="description">
+          Model Context Protocol.<br>
+          AI sends actions to apps,<br>
+          APIs, local software.<br><br>
+          <strong>Result:</strong> Things get done.
+        </p>
+      </div>
+    </div>
+
+    <div class="slide-number">03</div>
+  </div>
+</body>
+</html>

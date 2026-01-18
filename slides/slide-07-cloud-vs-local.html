@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1920, height=1080">
+  <title>Slide 07 - Cloud vs Local</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
+
+    body {
+      width: 1920px;
+      height: 1080px;
+      font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      background: #FAFAFA;
+      color: #1A1A1A;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .slide {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      grid-template-columns: 80px 1fr 80px;
+      grid-template-rows: 80px auto 1fr 80px;
+      padding: 0;
+    }
+
+    .logo {
+      position: absolute;
+      top: 64px;
+      right: 80px;
+      z-index: 100;
+    }
+
+    .logo img {
+      height: 64px;
+      width: 64px;
+      display: block;
+    }
+
+    .tier-badge {
+      position: absolute;
+      top: 80px;
+      left: 80px;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #888;
+    }
+
+    .header {
+      grid-column: 2 / 3;
+      grid-row: 2 / 3;
+      padding-top: 80px;
+      padding-bottom: 32px;
+    }
+
+    .section-label {
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #E53935;
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      font-size: 72px;
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+
+    .content {
+      grid-column: 2 / 3;
+      grid-row: 3 / 4;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+      padding-bottom: 80px;
+    }
+
+    .column {
+      padding-top: 32px;
+    }
+
+    .column-title {
+      font-size: 32px;
+      font-weight: 900;
+      margin-bottom: 32px;
+      letter-spacing: -0.02em;
+    }
+
+    .column-title.cloud {
+      color: #888;
+    }
+
+    .column-title.local {
+      color: #E53935;
+    }
+
+    .item-list {
+      list-style: none;
+    }
+
+    .item-list li {
+      font-size: 28px;
+      font-weight: 400;
+      color: #333;
+      padding: 16px 0;
+      border-bottom: 1px solid #E0E0E0;
+    }
+
+    .item-list li:last-child {
+      border-bottom: none;
+    }
+
+    .insight {
+      position: absolute;
+      bottom: 120px;
+      left: 80px;
+      font-size: 28px;
+      font-weight: 600;
+      color: #1A1A1A;
+      max-width: 800px;
+    }
+
+    .insight .highlight {
+      color: #E53935;
+    }
+
+    .slide-number {
+      position: absolute;
+      bottom: 80px;
+      right: 80px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="logo">
+      <img src="mcp-icon.svg" alt="MCP">
+    </div>
+    <div class="tier-badge">Tier 1 / Explorer</div>
+
+    <div class="header">
+      <div class="section-label">Architecture</div>
+      <h1>Apps can be anywhere.</h1>
+    </div>
+
+    <div class="content">
+      <div class="column">
+        <div class="column-title cloud">Cloud Apps</div>
+        <ul class="item-list">
+          <li>Miro</li>
+          <li>ProductPlan</li>
+          <li>GLEIF API</li>
+          <li>Jira, Slack, Notion...</li>
+        </ul>
+      </div>
+
+      <div class="column">
+        <div class="column-title local">Local Apps</div>
+        <ul class="item-list">
+          <li>Your browser</li>
+          <li>Files on your machine</li>
+          <li>Local git repos</li>
+          <li>Installed apps</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="insight">
+      MCP works with both. <span class="highlight">Data stays where you want it.</span>
+    </div>
+
+    <div class="slide-number">07</div>
+  </div>
+</body>
+</html>

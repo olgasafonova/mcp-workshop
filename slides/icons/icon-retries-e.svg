@@ -1,0 +1,8 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Loop with counter -->
+  <rect x="16" y="16" width="32" height="32" rx="4" stroke="#1A1A1A" stroke-width="3" fill="none"/>
+  <path d="M16 32 L8 32 L8 8 L56 8 L56 32 L48 32" stroke="#1A1A1A" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M52 28 L56 32 L52 36" stroke="#E53935" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Attempt number -->
+  <text x="32" y="38" font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="#E53935" text-anchor="middle">3</text>
+</svg>

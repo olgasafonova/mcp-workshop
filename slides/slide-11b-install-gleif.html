@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1920, height=1080">
+  <title>Slide 11b - Install GLEIF</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=JetBrains+Mono:wght@400;500&display=swap');
+
+    body {
+      width: 1920px;
+      height: 1080px;
+      font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      background: #FAFAFA;
+      color: #1A1A1A;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .slide {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      grid-template-columns: 80px 1fr 1fr 80px;
+      grid-template-rows: 80px auto 1fr 80px;
+      padding: 0;
+    }
+
+    .logo {
+      position: absolute;
+      top: 64px;
+      right: 80px;
+      z-index: 100;
+    }
+
+    .logo img {
+      height: 64px;
+      width: 64px;
+      display: block;
+    }
+
+    .tier-badge {
+      position: absolute;
+      top: 80px;
+      left: 80px;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #888;
+    }
+
+    .header {
+      grid-column: 2 / 4;
+      grid-row: 2 / 3;
+      padding-top: 80px;
+      padding-bottom: 32px;
+    }
+
+    h1 {
+      font-size: 72px;
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+
+    .subtitle {
+      font-size: 28px;
+      font-weight: 400;
+      color: #888;
+    }
+
+    .content {
+      grid-column: 2 / 4;
+      grid-row: 3 / 4;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .column-title {
+      font-size: 16px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #888;
+      margin-bottom: 24px;
+    }
+
+    .steps {
+      list-style: none;
+    }
+
+    .steps li {
+      font-size: 28px;
+      font-weight: 400;
+      color: #333;
+      padding: 16px 0;
+      padding-left: 32px;
+      position: relative;
+    }
+
+    .steps li::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: #E53935;
+      font-weight: 700;
+    }
+
+    .slide-number {
+      position: absolute;
+      bottom: 80px;
+      right: 80px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="logo">
+      <img src="mcp-icon.svg" alt="MCP">
+    </div>
+    <div class="tier-badge">Tier 2 / User</div>
+
+    <div class="header">
+      <h1>Try it: Add GLEIF</h1>
+      <div class="subtitle">github.com/olgasafonova/gleif-mcp-server/releases</div>
+    </div>
+
+    <div class="content">
+      <div class="column">
+        <div class="column-title">Steps</div>
+        <ul class="steps">
+          <li>Download the binary for your system</li>
+          <li>Open config folder</li>
+          <li>Add the config (see GitHub README)</li>
+          <li>Restart Claude Desktop</li>
+        </ul>
+      </div>
+
+      <div class="column">
+        <div class="column-title">Config Folder</div>
+        <ul class="steps">
+          <li>Mac: Cmd+Shift+G, paste path</li>
+          <li>Windows: Win+R, paste path</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="slide-number">10</div>
+  </div>
+</body>
+</html>

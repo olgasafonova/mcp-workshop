@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1920, height=1080">
+  <title>Slide 02 - The Problem</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
+
+    body {
+      width: 1920px;
+      height: 1080px;
+      font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      background: #FAFAFA;
+      color: #1A1A1A;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .slide {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      grid-template-columns: 80px 1fr 80px;
+      grid-template-rows: 80px 1fr 80px;
+      padding: 0;
+    }
+
+    .logo {
+      position: absolute;
+      top: 64px;
+      right: 80px;
+      z-index: 100;
+    }
+
+    .logo img {
+      height: 64px;
+      width: 64px;
+      display: block;
+    }
+
+    .tier-badge {
+      position: absolute;
+      top: 80px;
+      left: 80px;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #888;
+    }
+
+    .content {
+      grid-column: 2 / 3;
+      grid-row: 2 / 3;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding-top: 80px;
+      padding-right: 200px;
+    }
+
+    .section-label {
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #E53935;
+      margin-bottom: 48px;
+    }
+
+    .search-icon {
+      width: 320px;
+      height: auto;
+      margin-bottom: 48px;
+    }
+
+    blockquote {
+      font-size: 72px;
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 64px;
+      max-width: 1400px;
+    }
+
+    blockquote .highlight {
+      color: #E53935;
+    }
+
+    .explanation {
+      font-size: 28px;
+      font-weight: 400;
+      color: #444;
+      line-height: 1.5;
+      max-width: 900px;
+    }
+
+    .slide-number {
+      position: absolute;
+      bottom: 80px;
+      right: 80px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="logo">
+      <img src="mcp-icon.svg" alt="MCP">
+    </div>
+    <div class="tier-badge">Tier 1 / Explorer</div>
+    <div class="content">
+      <div class="section-label">The Problem</div>
+      <img src="icons/expensive-search-bar.svg" alt="" class="search-icon">
+      <blockquote>
+        AI that knows everything<br>
+        and does nothing is an<br>
+        <span class="highlight">expensive search bar.</span>
+      </blockquote>
+      <p class="explanation">
+        Current AI can answer questions and generate text.<br>
+        But it can't create a Miro board or update your roadmap.
+      </p>
+    </div>
+    <div class="slide-number">02</div>
+  </div>
+</body>
+</html>

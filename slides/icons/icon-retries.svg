@@ -1,0 +1,6 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Circular retry arrow -->
+  <path d="M32 8 A24 24 0 1 1 8 32" stroke="#1A1A1A" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M32 8 L26 16 L38 16 Z" fill="#E53935"/>
+  <text x="32" y="38" font-family="Inter, sans-serif" font-size="16" font-weight="700" fill="#1A1A1A" text-anchor="middle">2x</text>
+</svg>

@@ -1,0 +1,11 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Clock with slow/pause indicator -->
+  <circle cx="32" cy="32" r="24" stroke="#1A1A1A" stroke-width="3" fill="none"/>
+  <!-- Clock hands -->
+  <line x1="32" y1="32" x2="32" y2="18" stroke="#1A1A1A" stroke-width="3" stroke-linecap="round"/>
+  <line x1="32" y1="32" x2="42" y2="38" stroke="#1A1A1A" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="32" cy="32" r="3" fill="#1A1A1A"/>
+  <!-- Slow down indicator -->
+  <path d="M50 50 L58 58" stroke="#E53935" stroke-width="3" stroke-linecap="round"/>
+  <path d="M54 50 L58 54 L54 58" stroke="#E53935" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

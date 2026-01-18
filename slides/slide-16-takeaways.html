@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1920, height=1080">
+  <title>Slide 16 - Distilled</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
+
+    body {
+      width: 1920px;
+      height: 1080px;
+      font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      background: #FAFAFA;
+      color: #1A1A1A;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .slide {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      grid-template-columns: 80px 1fr 80px;
+      grid-template-rows: 80px auto 1fr 80px;
+      padding: 0;
+    }
+
+    .logo {
+      position: absolute;
+      top: 64px;
+      right: 80px;
+      z-index: 100;
+    }
+
+    .logo img {
+      height: 64px;
+      width: 64px;
+      display: block;
+    }
+
+    .header {
+      grid-column: 2 / 3;
+      grid-row: 2 / 3;
+      padding-top: 80px;
+      padding-bottom: 48px;
+    }
+
+    .section-label {
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #E53935;
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      font-size: 72px;
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+
+    .content {
+      grid-column: 2 / 3;
+      grid-row: 3 / 4;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      padding-bottom: 80px;
+    }
+
+    .takeaway {
+      display: flex;
+      align-items: baseline;
+      gap: 24px;
+    }
+
+    .takeaway-tier {
+      font-size: 16px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #888;
+      min-width: 120px;
+    }
+
+    .takeaway-text {
+      font-size: 36px;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    .takeaway-text .highlight {
+      color: #E53935;
+    }
+
+    .slide-number {
+      position: absolute;
+      bottom: 80px;
+      right: 80px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="logo">
+      <img src="mcp-icon.svg" alt="MCP">
+    </div>
+
+    <div class="header">
+      <div class="section-label">Wrap-up</div>
+      <h1>Distilled</h1>
+    </div>
+
+    <div class="content">
+      <div class="takeaway">
+        <div class="takeaway-tier">Explorers</div>
+        <div class="takeaway-text">MCP lets AI <span class="highlight">take action</span>, not just answer questions</div>
+      </div>
+
+      <div class="takeaway">
+        <div class="takeaway-tier">Users</div>
+        <div class="takeaway-text">Setup is simple: <span class="highlight">download, configure, restart</span></div>
+      </div>
+
+      <div class="takeaway">
+        <div class="takeaway-tier">Architects</div>
+        <div class="takeaway-text">Start small. Build for <span class="highlight">real value</span></div>
+      </div>
+    </div>
+
+    <div class="slide-number">18</div>
+  </div>
+</body>
+</html>

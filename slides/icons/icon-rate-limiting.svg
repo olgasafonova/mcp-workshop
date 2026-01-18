@@ -1,0 +1,8 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Funnel/valve controlling flow -->
+  <path d="M12 16 L52 16 L36 34 L36 48 L28 48 L28 34 Z" stroke="#1A1A1A" stroke-width="3" fill="none" stroke-linejoin="round"/>
+  <circle cx="20" cy="6" r="4" fill="#E53935"/>
+  <circle cx="32" cy="6" r="4" fill="#E53935"/>
+  <circle cx="44" cy="6" r="4" fill="#E53935"/>
+  <circle cx="32" cy="58" r="4" fill="#888"/>
+</svg>

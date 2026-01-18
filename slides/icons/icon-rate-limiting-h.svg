@@ -1,0 +1,9 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Metronome - steady pace -->
+  <path d="M20 56 L32 8 L44 56 Z" stroke="#1A1A1A" stroke-width="3" fill="none" stroke-linejoin="round"/>
+  <!-- Pendulum arm -->
+  <line x1="32" y1="48" x2="22" y2="20" stroke="#E53935" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="22" cy="20" r="4" fill="#E53935"/>
+  <!-- Base -->
+  <line x1="14" y1="56" x2="50" y2="56" stroke="#1A1A1A" stroke-width="3" stroke-linecap="round"/>
+</svg>

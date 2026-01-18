@@ -1,0 +1,7 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Traffic light -->
+  <rect x="20" y="4" width="24" height="56" rx="4" stroke="#1A1A1A" stroke-width="3" fill="none"/>
+  <circle cx="32" cy="16" r="6" fill="#888"/>
+  <circle cx="32" cy="32" r="6" fill="#E53935"/>
+  <circle cx="32" cy="48" r="6" fill="#888"/>
+</svg>

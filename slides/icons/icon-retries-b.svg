@@ -1,0 +1,15 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Multiple attempt arrows with increasing gaps -->
+  <path d="M8 32 L20 32" stroke="#888" stroke-width="3" stroke-linecap="round"/>
+  <path d="M16 28 L20 32 L16 36" stroke="#888" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <path d="M26 32 L42 32" stroke="#888" stroke-width="3" stroke-linecap="round"/>
+  <path d="M38 28 L42 32 L38 36" stroke="#888" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <path d="M48 32 L60 32" stroke="#E53935" stroke-width="3" stroke-linecap="round"/>
+  <path d="M56 28 L60 32 L56 36" stroke="#E53935" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Wait indicators -->
+  <circle cx="23" cy="44" r="2" fill="#888"/>
+  <circle cx="45" cy="44" r="3" fill="#888"/>
+</svg>

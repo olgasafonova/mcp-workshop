@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; width: 1080px; height: 1350px; }
+    .slide {
+      width: 1080px;
+      height: 1350px;
+      background: #ffffff;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      padding: 80px;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .sticker {
+      max-width: 500px;
+      margin-bottom: -100px;
+    }
+    h2 {
+      font-weight: 800;
+      font-size: 48px;
+      color: #111;
+      line-height: 1.2;
+      max-width: 700px;
+      margin-bottom: 16px;
+    }
+    h2 span { color: #0066FF; }
+    .subtitle {
+      font-size: 28px;
+      color: #555;
+      margin-bottom: 48px;
+    }
+    .qr-box {
+      background: transparent;
+      padding: 32px;
+      border-radius: 16px;
+      margin-bottom: 24px;
+    }
+    .qr-box img {
+      width: 240px;
+      height: 240px;
+    }
+    .handle {
+      font-size: 24px;
+      color: #0066FF;
+      font-weight: 600;
+    }
+    .slide-num {
+      position: absolute;
+      bottom: 40px;
+      right: 80px;
+      font-size: 18px;
+      color: #ccc;
+      font-weight: 600;
+    }
+    .hosts {
+      position: absolute;
+      bottom: 40px;
+      left: 80px;
+      font-size: 14px;
+      color: #999;
+    }
+  </style>
+</head>
+<body>
+<div class="slide">
+  <img src="/Users/olgasafonova/Projects/moomin-primitives-carousel/ultrathink-white.png" alt="Ultrathink" class="sticker">
+  <h2>Want to explore more <span>creative approaches</span> to technical concepts?</h2>
+  <p class="subtitle">Follow me on LinkedIn</p>
+  <img src="/Users/olgasafonova/Projects/moomin-primitives-carousel/linkedin-qr.png" alt="QR" style="width: 240px; height: 240px; margin-bottom: 24px;">
+  <p class="handle">linkedin.com/in/olgasafonova</p>
+  <p class="hosts">Women in Product Nordics & TechWomen Copenhagen</p>
+  <span class="slide-num">6 / 6</span>
+</div>
+</body>
+</html>
