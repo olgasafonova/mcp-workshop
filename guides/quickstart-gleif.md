@@ -1,35 +1,38 @@
-# GLEIF + Claude Desktop Quick Start
+# GLEIF + Claude Desktop
 
-**3 steps to look up company data in Claude Desktop.**
-
----
-
-## 1. Download
-
-Go to **[v0.2.0 release](https://github.com/olgasafonova/gleif-mcp-server/releases/tag/v0.2.0)** and download:
-
-| Your Mac | File |
-|----------|------|
-| M1/M2/M3/M4 | `gleif-mcp-server-darwin-arm64` |
-| Intel | `gleif-mcp-server-darwin-amd64` |
-
-| Windows | File |
-|---------|------|
-| Any | `gleif-mcp-server-windows-amd64.exe` |
+Give Claude the ability to look up company information.
 
 ---
 
-## 2. Configure
+## Step 1: Download
 
-**Mac:** Open Terminal, run:
-```bash
-chmod +x ~/Downloads/gleif-mcp-server-darwin-arm64
-xattr -d com.apple.quarantine ~/Downloads/gleif-mcp-server-darwin-arm64
+**[Click here to download](https://github.com/olgasafonova/gleif-mcp-server/releases/tag/v0.2.0)**
+
+Scroll to **Assets**, click your file:
+- **Mac M1/M2/M3/M4:** `gleif-mcp-server-darwin-arm64`
+- **Mac Intel:** `gleif-mcp-server-darwin-amd64`
+- **Windows:** `gleif-mcp-server-windows-amd64.exe`
+
+---
+
+## Step 2: Unblock (Mac only)
+
+Copy this entire line, paste into Terminal (`Cmd+Space`, type "Terminal"), press Enter:
+
+```
+chmod +x ~/Downloads/gleif-mcp-server-darwin-arm64 && xattr -d com.apple.quarantine ~/Downloads/gleif-mcp-server-darwin-arm64
 ```
 
-Then press `Cmd+Shift+G` in Finder, go to `~/Library/Application Support/Claude/`
+No output = it worked. Close Terminal.
 
-Open (or create) `claude_desktop_config.json` and paste:
+---
+
+## Step 3: Tell Claude where to find it
+
+1. In Finder, press `Cmd+Shift+G`
+2. Paste: `~/Library/Application Support/Claude/`
+3. Open `claude_desktop_config.json` (create it if missing)
+4. Paste this, replacing `YOUR_USERNAME` with yours:
 
 ```json
 {
@@ -41,40 +44,18 @@ Open (or create) `claude_desktop_config.json` and paste:
 }
 ```
 
-Replace `YOUR_USERNAME` with your Mac username (run `whoami` in Terminal to find it).
-
-**Windows:** Press `Win+R`, go to `%APPDATA%\Claude`
-
-Open (or create) `claude_desktop_config.json` and paste:
-
-```json
-{
-  "mcpServers": {
-    "gleif": {
-      "command": "C:\\Users\\YOUR_USERNAME\\Downloads\\gleif-mcp-server-windows-amd64.exe"
-    }
-  }
-}
-```
+> **Find your username:** Open Terminal, type `whoami`, press Enter.
 
 ---
 
-## 3. Test
+## Step 4: Restart & Test
 
-1. Quit Claude Desktop completely (`Cmd+Q` / Exit)
-2. Reopen Claude Desktop
-3. Type: **"Look up Apple's LEI using GLEIF"**
+1. Quit Claude (`Cmd+Q`)
+2. Open Claude
+3. Ask: *"Look up Apple's LEI"*
 
-You should see company data returned.
+Done!
 
 ---
 
-## Troubleshooting
-
-| Problem | Fix |
-|---------|-----|
-| No tools icon | Restart Claude Desktop completely |
-| "Can't find tool" | Check the path in config matches your username |
-| "Permission denied" | Run the `chmod` and `xattr` commands again |
-
-**Need more help?** See the [detailed guide](./claude-desktop-gleif-setup.md).
+**Stuck?** See [detailed guide](./claude-desktop-gleif-setup.md) or [open an issue](https://github.com/olgasafonova/gleif-mcp-server/issues).
