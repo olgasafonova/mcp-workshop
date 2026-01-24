@@ -27,7 +27,7 @@
       width: 100%;
       height: 100%;
       display: grid;
-      grid-template-columns: 80px 1fr 1fr 80px;
+      grid-template-columns: 80px 1fr 80px;
       grid-template-rows: 80px auto 1fr 80px;
       padding: 0;
     }
@@ -57,22 +57,10 @@
     }
 
     .header {
-      grid-column: 2 / 4;
+      grid-column: 2 / 3;
       grid-row: 2 / 3;
       padding-top: 80px;
       padding-bottom: 32px;
-    }
-
-    .try-badge {
-      display: inline-block;
-      background: #E53935;
-      color: white;
-      font-size: 16px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 8px 16px;
-      margin-bottom: 24px;
     }
 
     h1 {
@@ -90,12 +78,15 @@
     }
 
     .content {
-      grid-column: 2 / 4;
+      grid-column: 2 / 3;
       grid-row: 3 / 4;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 80px;
-      align-items: start;
+      display: flex;
+      gap: 64px;
+      align-items: flex-start;
+    }
+
+    .left-column {
+      flex: 0 0 600px;
     }
 
     .column-title {
@@ -103,12 +94,13 @@
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      color: #888;
+      color: #E53935;
       margin-bottom: 24px;
     }
 
     .steps {
       list-style: none;
+      margin-bottom: 48px;
     }
 
     .steps li {
@@ -128,17 +120,24 @@
       font-weight: 700;
     }
 
-    .qr-section {
+    .qr-url {
+      font-size: 28px;
+      font-weight: 600;
+      color: #333;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .qr-column {
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: flex-start;
     }
 
     .qr-code {
-      width: 280px;
-      height: 280px;
+      width: 300px;
+      height: 300px;
       background: white;
-      padding: 16px;
+      padding: 20px;
       border-radius: 12px;
       box-shadow: 0 4px 24px rgba(0,0,0,0.1);
     }
@@ -146,20 +145,6 @@
     .qr-code img {
       width: 100%;
       height: 100%;
-    }
-
-    .qr-label {
-      margin-top: 16px;
-      font-size: 20px;
-      font-weight: 600;
-      color: #333;
-    }
-
-    .qr-url {
-      margin-top: 8px;
-      font-size: 14px;
-      color: #888;
-      font-family: 'JetBrains Mono', monospace;
     }
 
     .slide-number {
@@ -180,13 +165,12 @@
     <div class="tier-badge">Tier 2 / User</div>
 
     <div class="header">
-      <div class="try-badge">Try It Now</div>
-      <h1>Install GLEIF Server</h1>
-      <div class="subtitle">Scan QR or follow the steps</div>
+      <h1>Try it: Add GLEIF</h1>
+      <div class="subtitle">Scan QR for step-by-step guide</div>
     </div>
 
     <div class="content">
-      <div class="column">
+      <div class="left-column">
         <div class="column-title">Steps</div>
         <ul class="steps">
           <li>Download binary for your system</li>
@@ -194,14 +178,14 @@
           <li>Add config to Claude Desktop</li>
           <li>Restart and test</li>
         </ul>
+        <div class="qr-url">olgasafonova.github.io/mcp-workshop</div>
       </div>
 
-      <div class="qr-section">
+      <div class="qr-column">
+        <div class="column-title">Scan to Start</div>
         <div class="qr-code">
           <img src="qr-quickstart.svg" alt="QR Code to setup guide">
         </div>
-        <div class="qr-label">Setup Guide</div>
-        <div class="qr-url">olgasafonova.github.io/mcp-workshop</div>
       </div>
     </div>
 
