@@ -11,7 +11,7 @@
       box-sizing: border-box;
     }
 
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=JetBrains+Mono:wght@400;500&display=swap');
 
     body {
       width: 1920px;
@@ -26,11 +26,10 @@
     .slide {
       width: 100%;
       height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 80px;
+      display: grid;
+      grid-template-columns: 80px 1fr 1fr 80px;
+      grid-template-rows: 80px auto 1fr 80px;
+      padding: 0;
     }
 
     .logo {
@@ -57,6 +56,13 @@
       color: #888;
     }
 
+    .header {
+      grid-column: 2 / 4;
+      grid-row: 2 / 3;
+      padding-top: 80px;
+      padding-bottom: 32px;
+    }
+
     .try-badge {
       display: inline-block;
       background: #E53935;
@@ -74,14 +80,52 @@
       font-weight: 900;
       line-height: 1;
       letter-spacing: -0.02em;
-      margin-bottom: 48px;
-      text-align: center;
+      margin-bottom: 16px;
     }
 
-    .main-content {
-      display: flex;
-      align-items: center;
-      gap: 120px;
+    .subtitle {
+      font-size: 28px;
+      font-weight: 400;
+      color: #888;
+    }
+
+    .content {
+      grid-column: 2 / 4;
+      grid-row: 3 / 4;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .column-title {
+      font-size: 16px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #888;
+      margin-bottom: 24px;
+    }
+
+    .steps {
+      list-style: none;
+    }
+
+    .steps li {
+      font-size: 28px;
+      font-weight: 400;
+      color: #333;
+      padding: 16px 0;
+      padding-left: 32px;
+      position: relative;
+    }
+
+    .steps li::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: #E53935;
+      font-weight: 700;
     }
 
     .qr-section {
@@ -91,12 +135,12 @@
     }
 
     .qr-code {
-      width: 360px;
-      height: 360px;
+      width: 280px;
+      height: 280px;
       background: white;
-      padding: 24px;
-      border-radius: 16px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+      padding: 16px;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.1);
     }
 
     .qr-code img {
@@ -105,31 +149,17 @@
     }
 
     .qr-label {
-      margin-top: 24px;
-      font-size: 28px;
+      margin-top: 16px;
+      font-size: 20px;
       font-weight: 600;
       color: #333;
     }
 
-    .steps {
-      list-style: none;
-    }
-
-    .steps li {
-      font-size: 32px;
-      font-weight: 400;
-      color: #333;
-      padding: 20px 0;
-      padding-left: 40px;
-      position: relative;
-    }
-
-    .steps li::before {
-      content: attr(data-step);
-      position: absolute;
-      left: 0;
-      color: #E53935;
-      font-weight: 700;
+    .qr-url {
+      margin-top: 8px;
+      font-size: 14px;
+      color: #888;
+      font-family: 'JetBrains Mono', monospace;
     }
 
     .slide-number {
@@ -149,21 +179,29 @@
     </div>
     <div class="tier-badge">Tier 2 / User</div>
 
-    <div class="try-badge">Try It Now</div>
-    <h1>Install GLEIF Server</h1>
+    <div class="header">
+      <div class="try-badge">Try It Now</div>
+      <h1>Install GLEIF Server</h1>
+      <div class="subtitle">Scan QR or follow the steps</div>
+    </div>
 
-    <div class="main-content">
-      <ul class="steps">
-        <li data-step="1.">Download binary</li>
-        <li data-step="2.">Add to Claude config</li>
-        <li data-step="3.">Restart & test</li>
-      </ul>
+    <div class="content">
+      <div class="column">
+        <div class="column-title">Steps</div>
+        <ul class="steps">
+          <li>Download binary for your system</li>
+          <li>Mac: unblock in Terminal (one command)</li>
+          <li>Add config to Claude Desktop</li>
+          <li>Restart and test</li>
+        </ul>
+      </div>
 
       <div class="qr-section">
         <div class="qr-code">
           <img src="qr-quickstart.svg" alt="QR Code to setup guide">
         </div>
-        <div class="qr-label">Scan for Guide</div>
+        <div class="qr-label">Setup Guide</div>
+        <div class="qr-url">olgasafonova.github.io/mcp-workshop</div>
       </div>
     </div>
 
