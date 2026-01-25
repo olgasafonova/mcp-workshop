@@ -97,7 +97,7 @@
 
     .part-box {
       width: 360px;
-      height: 200px;
+      height: 160px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -113,7 +113,7 @@
     }
 
     .part-number {
-      font-size: 14px;
+      font-size: 18px;
       font-weight: 600;
       letter-spacing: 0.15em;
       text-transform: uppercase;
@@ -133,10 +133,28 @@
 
     .part-examples {
       margin-top: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .example {
       font-size: 28px;
       color: #444;
-      text-align: left;
-      line-height: 1.5;
+      padding-left: 36px;
+      position: relative;
+    }
+
+    .example::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: #888;
+      font-weight: 700;
+    }
+
+    .part:nth-child(3) .example::before {
+      color: #E53935;
     }
 
     .arrow {
@@ -144,7 +162,7 @@
       color: #888;
       padding: 0 32px;
       font-weight: 300;
-      margin-top: 76px; /* center with 200px box */
+      margin-top: 56px; /* center with 160px box */
     }
 
     .slide-number {
@@ -176,9 +194,9 @@
           <div class="part-title">Client</div>
         </div>
         <div class="part-examples">
-          Claude Desktop<br>
-          ChatGPT<br>
-          Cursor
+          <div class="example">Claude Desktop</div>
+          <div class="example">ChatGPT</div>
+          <div class="example">Cursor</div>
         </div>
       </div>
 
@@ -190,9 +208,9 @@
           <div class="part-title">Server</div>
         </div>
         <div class="part-examples">
-          Miro MCP Server<br>
-          Playwright MCP Server<br>
-          GLEIF MCP Server
+          <div class="example">Miro MCP Server</div>
+          <div class="example">Playwright MCP Server</div>
+          <div class="example">GLEIF MCP Server</div>
         </div>
       </div>
 
@@ -204,9 +222,9 @@
           <div class="part-title">App</div>
         </div>
         <div class="part-examples">
-          Miro<br>
-          Your browser<br>
-          GLEIF API
+          <div class="example">Miro</div>
+          <div class="example">Your browser</div>
+          <div class="example">GLEIF API</div>
         </div>
       </div>
     </div>
