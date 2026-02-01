@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GLEIF + Claude Desktop Setup</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #FAFAFA;
+      color: #1A1A1A;
+      line-height: 1.6;
+      padding: 24px;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 32px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: #666;
+      margin-bottom: 32px;
+      font-size: 18px;
+    }
+
+    h2 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-top: 32px;
+      margin-bottom: 16px;
+      color: #E53935;
+    }
+
+    .step-number {
+      display: inline-block;
+      background: #E53935;
+      color: white;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 28px;
+      font-weight: 700;
+      font-size: 14px;
+      margin-right: 8px;
+    }
+
+    p {
+      margin-bottom: 16px;
+    }
+
+    a {
+      color: #E53935;
+      font-weight: 600;
+    }
+
+    .download-btn {
+      display: inline-block;
+      background: #E53935;
+      color: white;
+      padding: 16px 32px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 18px;
+      margin: 16px 0;
+      border-radius: 4px;
+    }
+
+    .download-btn:hover {
+      background: #C62828;
+    }
+
+    .files {
+      background: #F5F5F5;
+      padding: 16px;
+      margin: 16px 0;
+      border-left: 4px solid #E53935;
+    }
+
+    .files code {
+      display: block;
+      font-family: 'SF Mono', Monaco, monospace;
+      font-size: 14px;
+      margin: 4px 0;
+    }
+
+    .code-block {
+      background: #1A1A1A;
+      color: #FAFAFA;
+      padding: 16px;
+      font-family: 'SF Mono', Monaco, monospace;
+      font-size: 14px;
+      overflow-x: auto;
+      margin: 16px 0;
+      border-radius: 4px;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 0;
+      margin-top: 16px;
+    }
+
+    .tab {
+      padding: 12px 24px;
+      background: #E0E0E0;
+      cursor: pointer;
+      font-weight: 600;
+      border: none;
+      font-size: 16px;
+    }
+
+    .tab.active {
+      background: #1A1A1A;
+      color: white;
+    }
+
+    .tab-content {
+      display: none;
+      background: #F5F5F5;
+      padding: 24px;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .warning {
+      background: #FFF3E0;
+      border-left: 4px solid #FF9800;
+      padding: 12px 16px;
+      margin: 16px 0;
+    }
+
+    .success {
+      background: #E8F5E9;
+      border-left: 4px solid #4CAF50;
+      padding: 12px 16px;
+      margin: 16px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 12px;
+      border-bottom: 1px solid #E0E0E0;
+    }
+
+    th {
+      font-weight: 700;
+      background: #F5F5F5;
+    }
+
+    footer {
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid #E0E0E0;
+      color: #888;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <h1>GLEIF + Claude Desktop</h1>
+  <p class="subtitle">Give Claude the ability to look up company information</p>
+
+  <h2><span class="step-number">1</span> Download</h2>
+
+  <a href="https://github.com/olgasafonova/gleif-mcp-server/releases/latest" class="download-btn">Download from GitHub</a>
+
+  <div class="files">
+    <p><strong>Choose your file:</strong></p>
+    <code>Mac M1/M2/M3/M4: <strong>gleif-mcp-server-darwin-arm64.mcpb</strong></code>
+    <code>Mac Intel: <strong>gleif-mcp-server-darwin-amd64.mcpb</strong></code>
+    <code>Windows: <strong>gleif-mcp-server-windows-amd64.mcpb</strong></code>
+  </div>
+
+  <h2><span class="step-number">2</span> Unblock the file</h2>
+
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('mac')">Mac</button>
+    <button class="tab" onclick="showTab('windows')">Windows</button>
+  </div>
+
+  <div id="mac" class="tab-content active">
+    <p>Open Terminal (<code>Cmd+Space</code>, type "Terminal") and paste this entire line:</p>
+    <div class="code-block">chmod +x ~/Downloads/gleif-mcp-server-darwin-arm64.mcpb && xattr -d com.apple.quarantine ~/Downloads/gleif-mcp-server-darwin-arm64.mcpb</div>
+    <p>Press Enter. No output = it worked.</p>
+  </div>
+
+  <div id="windows" class="tab-content">
+    <p>If you see a Windows SmartScreen warning:</p>
+    <p>Click <strong>"More info"</strong> → <strong>"Run anyway"</strong></p>
+    <p>The file is safe — it's just not signed.</p>
+  </div>
+
+  <h2><span class="step-number">3</span> Configure Claude Desktop</h2>
+
+  <div class="tabs">
+    <button class="tab active" onclick="showTab2('mac2')">Mac</button>
+    <button class="tab" onclick="showTab2('windows2')">Windows</button>
+  </div>
+
+  <div id="mac2" class="tab-content active">
+    <p>1. In Finder, press <code>Cmd+Shift+G</code></p>
+    <p>2. Paste: <code>~/Library/Application Support/Claude/</code></p>
+    <p>3. Open <code>claude_desktop_config.json</code> (create if missing)</p>
+    <p>4. Paste this (replace YOUR_USERNAME):</p>
+    <div class="code-block">{
+  "mcpServers": {
+    "gleif": {
+      "command": "/Users/YOUR_USERNAME/Downloads/gleif-mcp-server-darwin-arm64.mcpb"
+    }
+  }
+}</div>
+    <div class="warning">
+      <strong>Find your username:</strong> Open Terminal, type <code>whoami</code>, press Enter.
+    </div>
+  </div>
+
+  <div id="windows2" class="tab-content">
+    <p>1. Press <code>Win+R</code></p>
+    <p>2. Paste: <code>%APPDATA%\Claude</code></p>
+    <p>3. Open <code>claude_desktop_config.json</code> (create if missing)</p>
+    <p>4. Paste this (replace YOUR_USERNAME):</p>
+    <div class="code-block">{
+  "mcpServers": {
+    "gleif": {
+      "command": "C:\\Users\\YOUR_USERNAME\\Downloads\\gleif-mcp-server-windows-amd64.mcpb"
+    }
+  }
+}</div>
+    <div class="warning">
+      <strong>Important:</strong> Use double backslashes <code>\\</code> in Windows paths!
+    </div>
+  </div>
+
+  <h2><span class="step-number">4</span> Restart & Test</h2>
+
+  <p>1. <strong>Quit Claude completely</strong> (Mac: <code>Cmd+Q</code> | Windows: right-click taskbar → Close)</p>
+  <p>2. Open Claude Desktop</p>
+  <p>3. Type: <strong>"Look up Apple's LEI"</strong></p>
+
+  <div class="success">
+    You should see Claude call the GLEIF tool and return company data. Done!
+  </div>
+
+  <h2>Troubleshooting</h2>
+
+  <table>
+    <tr>
+      <th>Problem</th>
+      <th>Solution</th>
+    </tr>
+    <tr>
+      <td>Server not available</td>
+      <td>Check path for typos. Restart Claude.</td>
+    </tr>
+    <tr>
+      <td>Mac security warning</td>
+      <td>Run the Terminal command from Step 2</td>
+    </tr>
+    <tr>
+      <td>Windows SmartScreen</td>
+      <td>Click "More info" → "Run anyway"</td>
+    </tr>
+    <tr>
+      <td>JSON error</td>
+      <td>Check for missing commas. Validate at <a href="https://jsonlint.com">jsonlint.com</a></td>
+    </tr>
+  </table>
+
+  <footer>
+    <p>MCP Workshop by <a href="https://linkedin.com/in/olgasafonova">Olga Safonova</a></p>
+    <p><a href="https://github.com/olgasafonova/gleif-mcp-server">GLEIF MCP Server on GitHub</a></p>
+  </footer>
+
+  <script>
+    function showTab(id) {
+      document.querySelectorAll('#mac, #windows').forEach(el => el.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      document.querySelectorAll('.tabs')[0].querySelectorAll('.tab').forEach((el, i) => {
+        el.classList.toggle('active', (id === 'mac' && i === 0) || (id === 'windows' && i === 1));
+      });
+    }
+
+    function showTab2(id) {
+      document.querySelectorAll('#mac2, #windows2').forEach(el => el.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      document.querySelectorAll('.tabs')[1].querySelectorAll('.tab').forEach((el, i) => {
+        el.classList.toggle('active', (id === 'mac2' && i === 0) || (id === 'windows2' && i === 1));
+      });
+    }
+  </script>
+</body>
+</html>

@@ -6,8 +6,8 @@
 
 ## Step 1: Download
 
-1. Go to: **github.com/olgasafonova/gleif-mcp-server/releases**
-2. Download:
+1. Go to: **[github.com/olgasafonova/gleif-mcp-server/releases/latest](https://github.com/olgasafonova/gleif-mcp-server/releases/latest)**
+2. Scroll to **Assets** and download:
    - **Apple Silicon (M1/M2/M3/M4):** `gleif-mcp-server-darwin-arm64.mcpb`
    - **Intel Mac:** `gleif-mcp-server-darwin-amd64.mcpb`
 

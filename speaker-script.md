@@ -9,11 +9,11 @@
 ## Slide 1: Title
 **"From Explorer to Architect"**
 
-> "Welcome everyone. I'm Olga Safonova, AI Product Leader. I build AI tools in Go.
+> "Welcome everyone. I'm Olga Safonova, AI Product Leader.
 >
-> Today we're covering MCP — Model Context Protocol. We'll go from understanding what it is, to using it, to building your own servers.
+> Today we're covering MCP — Model Context Protocol. The standard that lets AI assistants take action in your apps.
 >
-> Three tiers. Pick your depth. If you're non-technical, Tier 1 is for you. If you want to use MCPs, stay for Tier 2. Developers who want to build — Tier 3."
+> We'll go from understanding what it is, to using it, to building your own servers. Three tiers. Pick your depth."
 
 **[~1 min]**
 
@@ -28,6 +28,8 @@
 
 > "Let's start with a problem. Current AI can answer questions. It can generate text. But ask it to create a Miro board? Update your roadmap? It can't.
 >
+> [Point to the quote]
+>
 > AI that knows everything and does nothing is just an expensive search bar."
 
 **[~1 min]**
@@ -37,11 +39,15 @@
 ## Slide 3: RAG vs MCP
 **"The Distinction"**
 
-> "You might have heard of RAG — Retrieval Augmented Generation. RAG is about getting information INTO the AI. You feed it documents, context, data.
+> "You might have heard of RAG — Retrieval Augmented Generation.
 >
-> MCP is the opposite. It's about getting commands OUT of the AI. The AI takes action.
+> [Point to left side]
+> RAG is about getting information INTO the AI. You feed it documents, context, data. Result: better answers.
 >
-> RAG = information flows in. MCP = actions flow out."
+> [Point to right side]
+> MCP is the opposite. Commands flow OUT. The AI takes action. Result: things get done.
+>
+> Both are important. RAG improves what AI knows. MCP improves what AI does."
 
 **[~2 min]**
 
@@ -50,9 +56,9 @@
 ## Slide 4: What MCP Is
 **"A protocol. Like USB-C for AI."**
 
-> "So what is MCP? It's a protocol. Think of it like USB-C for AI.
+> "So what is MCP? It's a protocol.
 >
-> Before USB-C, every device had a different cable. Now one cable works everywhere.
+> Think of it like USB-C for AI. Before USB-C, every device had a different cable. Now one cable works everywhere.
 >
 > MCP is the same idea. One standard that lets any AI assistant connect to any app."
 
@@ -65,11 +71,13 @@
 
 > "MCP has three parts.
 >
+> [Point to each box]
+>
 > First, the CLIENT — that's your AI assistant. Claude, ChatGPT, Cursor.
 >
-> Second, the SERVER — the bridge. This is what I build. Miro MCP Server, Playwright MCP Server.
+> Second, the SERVER — the bridge. This is what I build. Miro MCP Server, Playwright MCP Server, GLEIF MCP Server.
 >
-> Third, the APP — the actual service. Miro, your browser, your filesystem.
+> Third, the APP — the actual service. Miro, your browser, the GLEIF API.
 >
 > Client talks to Server. Server talks to App. That's it."
 
@@ -82,11 +90,14 @@
 
 > "What does a server actually give the AI?
 >
-> TOOLS — actions the AI can take. Create a board. Look up a company.
+> [Point to Tools]
+> TOOLS — actions the AI can take. Search for a company. Create a board. Take a screenshot.
 >
-> RESOURCES — data the AI can read. Files, database records.
+> [Point to Resources]
+> RESOURCES — data the AI can read. Files on your computer, database records, live API data.
 >
-> PROMPTS — pre-built instructions for specific tasks.
+> [Point to Prompts]
+> PROMPTS — reusable templates for specific tasks. Code review checklists, report formats.
 >
 > Most servers focus on tools. That's where the action is."
 
@@ -99,11 +110,14 @@
 
 > "Here's what matters. The app can be in the cloud OR on your machine.
 >
-> Cloud apps — Miro, ProductPlan, GLEIF API. Data lives on someone else's server.
+> [Point to Cloud column]
+> Cloud apps — Miro, ProductPlan, GLEIF API, Slack. Data lives on someone else's server.
 >
+> [Point to Local column]
 > Local apps — your browser, files on your machine, local git repos. Data stays with you.
 >
-> Same protocol. Different locations. Your choice."
+> [Point to insight]
+> Same protocol. Different locations. Data stays where you want it."
 
 **[~2 min]**
 
@@ -126,9 +140,11 @@
 ## Slide 8: Tier 2 Intro
 **"How to Use MCPs"**
 
-> "Tier 2 — How to USE MCPs. No coding required. Just follow along.
+> "Tier 2 — How to USE MCPs.
 >
-> First, let's make sure everyone has Claude Desktop. Then we'll install an MCP together."
+> No coding required. Just follow along. Three live demos coming up.
+>
+> First, let's make sure everyone has Claude Desktop."
 
 **[~30 sec]**
 
@@ -139,9 +155,13 @@
 
 > "If you don't have Claude Desktop yet, grab it now. Go to claude.ai/download.
 >
+> [Point to Mac column]
 > Mac users — download the DMG, drag to Applications, open and sign in.
 >
+> [Point to Windows column]
 > Windows users — download the installer, run it, sign in.
+>
+> **Important: Free accounts work! You don't need Pro or Max.**
 >
 > Already have it? Great, you're ahead."
 
@@ -149,27 +169,8 @@
 
 ---
 
-## Slide 10: Install GLEIF
-**"Your First MCP Server"**
-
-> "Now let's add an MCP server together. We're using GLEIF — it looks up company legal identifiers.
->
-> Go to the GitHub link on screen. Download the binary for your system.
->
-> Mac users — open Finder, press Cmd+Shift+G, paste the config path.
->
-> Windows users — press Win+R, paste the path.
->
-> Open claude_desktop_config.json. Add the config from the README. Restart Claude.
->
-> I'll give you a few minutes. Raise your hand if you're stuck."
-
-**[~5 min — walk around, help people]**
-
----
-
-## Slide 11: Demo GLEIF
-**"Cloud App Demo"**
+## Slide 10: Demo 1 — GLEIF
+**"Cloud App Pattern"**
 
 > "First demo — a cloud app. GLEIF is a global database of legal entities. Every company in finance has a unique ID called an LEI.
 >
@@ -177,12 +178,10 @@
 
 **[LIVE DEMO]**
 ```
-PROMPT: "Use GLEIF to look up Apple Inc's LEI"
+PROMPT: "Use the GLEIF server to look up Apple Inc's LEI"
 ```
 
-> "Notice — Claude didn't search the web. It called a specific API. Got structured data back. That LEI is real, used in regulations worldwide.
->
-> Let me ask a follow-up."
+> "Notice — Claude didn't search the web. It called a specific API. Got structured data back. That LEI is real, used in regulations worldwide."
 
 ```
 PROMPT: "Who is Apple's ultimate parent company according to GLEIF?"
@@ -194,8 +193,8 @@ PROMPT: "Who is Apple's ultimate parent company according to GLEIF?"
 
 ---
 
-## Slide 12: Demo Playwright
-**"Local App Demo"**
+## Slide 11: Demo 2 — Playwright
+**"Local App Pattern"**
 
 > "Now something different. This MCP controls software on MY machine."
 
@@ -210,24 +209,72 @@ PROMPT: "Open a browser and go to producthunt.com"
 PROMPT: "Take a screenshot of the page"
 ```
 
-> "Claude can see what's on screen. This is the local app pattern. Privacy — data stays on your machine."
+> "Claude can see what's on screen. This is the local app pattern. Privacy — data stays on your machine. No API keys needed for local apps."
 
 **[~4 min including demo]**
 
 ---
 
-## Slide 13: Configuration
-**"Setup is simple"**
+## Slide 12: Demo 3 — Configuration
+**"What you actually do"**
 
-> "How hard is setup? Let me show you the config file."
-
-**[Show claude_desktop_config.json]**
-
-> "This is it. A JSON file. Server names and paths. Each server is just a program Claude knows how to talk to.
+> "How hard is setup? Let me show you the config file.
 >
-> Add a server, restart Claude, done. No coding required to USE an MCP — only to BUILD one."
+> [Point to code block]
+>
+> This is it. A JSON file. Server names and how to start them. Each server is just a program Claude knows how to talk to.
+>
+> [Point to takeaways]
+>
+> Edit one file. Give it a name, tell it how to start. Restart Claude. Done. No coding required to USE an MCP — only to BUILD one."
 
 **[~4 min]**
+
+---
+
+## Slide 13: Install GLEIF (Hands-on)
+**"Try it yourself"**
+
+> "Now let's add an MCP server together.
+>
+> Scan the QR code on screen — it'll take you to a step-by-step guide.
+>
+> [Point to steps]
+>
+> Download the binary for your system. Mac users need to unblock it in Terminal — one command. Add the config to Claude Desktop. Restart and test.
+>
+> I'll give you a few minutes. Raise your hand if you get stuck."
+
+**[~5 min — walk around, help people]**
+
+### HANDS-ON SUPPORT NOTES
+
+**Common issues people get stuck on:**
+
+1. **Mac security block** — Most common! Apple blocks unsigned binaries.
+   - Solution: `xattr -d com.apple.quarantine ~/path/to/gleif-mcp-server`
+   - Or: System Settings → Privacy & Security → Allow anyway
+
+2. **Can't find config file location**
+   - Mac: `~/Library/Application Support/Claude/claude_desktop_config.json`
+   - Windows: `%APPDATA%\Claude\claude_desktop_config.json`
+   - Tip: Copy path from the guide, use Cmd+Shift+G (Mac) or Win+R (Windows)
+
+3. **JSON syntax errors** — Missing comma, extra comma, wrong brackets
+   - Solution: Use the exact JSON from the guide, don't edit manually
+
+4. **Forgot to restart Claude** — Config only loads on startup
+   - Solution: Quit Claude completely (check menu bar), reopen
+
+5. **Binary not in PATH** — Server won't start
+   - Solution: Use full path in config, e.g., `/Users/name/gleif-mcp-server`
+
+**If people are really stuck:**
+- "That's okay! You can set this up after the workshop. The guide has all the steps."
+- "Pair up with a neighbor who got it working."
+- "Watch my screen for now — I'll demo it."
+
+**Time check:** If most people are stuck after 3 minutes, move on. Don't let hands-on derail the session.
 
 ---
 
@@ -248,7 +295,9 @@ PROMPT: "Take a screenshot of the page"
 ## Slide 14: Tier 3 Intro
 **"How to Build MCPs"**
 
-> "Tier 3 — How to BUILD MCPs. This is for developers who want to create their own."
+> "Tier 3 — How to BUILD MCPs.
+>
+> This is for developers who want to create their own. Real patterns from production servers I've shipped."
 
 **[~30 sec]**
 
@@ -259,11 +308,18 @@ PROMPT: "Take a screenshot of the page"
 
 > "Here's the typical structure of an MCP server.
 >
-> Main entry point. Tools folder with definitions and handlers. Client folder for API communication.
+> [Point to folder structure]
 >
-> Definitions say WHAT the server can do. Handlers say HOW it does it.
+> Main entry point registers tools and starts the server.
 >
-> I built four servers in December. ProductPlan was first — learned the SDK. MediaWiki added auth and rate limiting. Miro scaled to 77 tools. GLEIF was refined, minimal, production-ready."
+> [Point to definitions.go]
+> Definitions say WHAT the server can do. Tool names, descriptions, parameter schemas. This is what Claude sees.
+>
+> [Point to handlers.go]
+> Handlers say HOW it does it. The actual implementation. Calls APIs, processes data, returns results.
+>
+> [Point to client.go]
+> Client handles HTTP communication with auth, rate limiting, caching. Talks to the real API."
 
 **[~4 min]**
 
@@ -272,19 +328,21 @@ PROMPT: "Take a screenshot of the page"
 ## Slide 16: Production Patterns
 **"Lessons Learned"**
 
-> "What I learned building these.
+> "What I learned building four servers in December.
+>
+> [Point to each pattern]
 >
 > ERROR HANDLING — wrap API errors with context. Clear messages.
 >
-> AUTHENTICATION — store keys safely, not in code. Check they exist at start.
+> AUTHENTICATION — store keys safely, not in code. Check they exist at startup.
 >
 > CACHING — remember recent results. Fewer API calls, faster responses.
 >
-> RATE LIMITING — don't hit APIs too fast.
+> RATE LIMITING — don't hit APIs too fast. Slow down when needed.
 >
-> BULK OPERATIONS — group requests. One batch beats many singles.
+> BULK OPERATIONS — group similar requests. One batch beats many singles.
 >
-> RETRIES — retry temporary failures. Skip bad requests. Wait longer between attempts."
+> RETRIES — retry temporary failures like timeouts. Skip bad requests. Wait longer between attempts."
 
 **[~5 min]**
 
@@ -295,13 +353,18 @@ PROMPT: "Take a screenshot of the page"
 
 > "How to start?
 >
-> Fork GLEIF if you want simple — 4 tools, minimal code.
+> [Point to recommended option]
+> Fork GLEIF if you want simple — 12 tools, minimal code, read-only API. Perfect for learning.
 >
-> Fork Miro if you want complete — 77 tools, bulk operations, the works.
+> [Point to Miro option]
+> Fork Miro if you want complete — 77 tools, OAuth, bulk operations. Reference for complex servers.
 >
-> Both use the Go SDK. TypeScript and Python SDKs also available.
+> [Point to SDK note]
+> Python and TypeScript are most popular. Tutorials everywhere.
 >
-> Start small. My first server had 5 tools. Ship it, learn, add more."
+> Why Go? Single binary, no runtime dependencies, starts instantly, cross-compiles for any OS. Python needs a runtime, TypeScript needs Node. Go just works.
+>
+> You decide what works for you."
 
 **[~4 min]**
 
@@ -316,11 +379,13 @@ PROMPT: "Take a screenshot of the page"
 
 > "Let's distill this.
 >
+> [Point to each tier]
+>
 > EXPLORERS — MCP lets AI take action, not just answer questions.
 >
-> USERS — setup is simple. Download, configure, restart.
+> USERS — Setup is simple. Download, configure, restart.
 >
-> ARCHITECTS — start small. My first server had 5 tools. Ship and iterate."
+> ARCHITECTS — Start small. Build for real value."
 
 **[~2 min]**
 
@@ -331,9 +396,11 @@ PROMPT: "Take a screenshot of the page"
 
 > "This isn't theory. Real people using these servers.
 >
-> Miro's CEO reached out about the Miro MCP. Their product evangelist said we're 'ahead of the curve.'
+> [Point to Miro side]
+> Miro's CEO reached out about the Miro MCP. Their Chief Product Evangelist said we're 'ahead of the curve.'
 >
-> Colleagues at Tietoevry call it 'SO useful', a 'golden nugget', 'one of the best gifts ever.'
+> [Point to Tietoevry side]
+> Colleagues call it 'SO useful', a 'golden nugget', 'one of the best gifts ever.'
 >
 > This stuff works. And it's just the beginning."
 
@@ -357,7 +424,7 @@ PROMPT: "Take a screenshot of the page"
 
 > "Thank you for your time.
 >
-> LinkedIn, GitHub, Substack — scan the QR codes.
+> LinkedIn, GitHub, Substack — scan the QR codes if you want to connect.
 >
 > I'd love to hear what you build. Questions?"
 
@@ -379,6 +446,11 @@ PROMPT: "Take a screenshot of the page"
 - Backup laptop with identical setup
 - Pre-recorded full demo (2 min)
 
+**If hands-on installation fails for many people:**
+- "That's totally normal for first-time setup. The guide has troubleshooting steps."
+- "You can do this after the workshop — let's keep moving so everyone gets value."
+- Show your own successful setup as proof it works
+
 **Rule:** Never apologize for more than 5 seconds. Acknowledge, switch to backup, keep moving.
 
 ---
@@ -388,9 +460,23 @@ PROMPT: "Take a screenshot of the page"
 | Section | Target | Actual |
 |---------|--------|--------|
 | Slide 1 (Title) | 0:00 | |
-| Slides 2-7 (Tier 1) | 0:01-0:15 | |
-| Break + Q&A | 0:15-0:18 | |
-| Slides 8-13 (Tier 2 + Setup) | 0:18-0:38 | |
-| Break + Q&A | 0:38-0:40 | |
-| Slides 14-17 (Tier 3) | 0:40-0:55 | |
-| Slides 18-21 (Wrap) | 0:55-1:00 | |
+| Slides 2-7 (Tier 1) | 0:01-0:12 | |
+| Break + Q&A | 0:12-0:15 | |
+| Slides 8-13 (Tier 2 + Hands-on) | 0:15-0:35 | |
+| Break + Q&A | 0:35-0:38 | |
+| Slides 14-17 (Tier 3) | 0:38-0:52 | |
+| Slides 18-21 (Wrap) | 0:52-1:00 | |
+
+---
+
+## PRE-WORKSHOP CHECKLIST
+
+- [ ] Claude Desktop open and signed in
+- [ ] GLEIF MCP configured and working
+- [ ] Playwright MCP configured and working
+- [ ] Test both demos work
+- [ ] QR codes scannable from back of room
+- [ ] Backup laptop ready with same setup
+- [ ] Pre-recorded demo videos accessible
+- [ ] Setup guide URL short and memorable
+- [ ] WiFi password ready to share (if needed)

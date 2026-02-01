@@ -6,8 +6,8 @@
 
 ## Step 1: Download
 
-1. Go to: **github.com/olgasafonova/gleif-mcp-server/releases**
-2. Download: `gleif-mcp-server-windows-amd64.mcpb`
+1. Go to: **[github.com/olgasafonova/gleif-mcp-server/releases/latest](https://github.com/olgasafonova/gleif-mcp-server/releases/latest)**
+2. Scroll to **Assets** and download: `gleif-mcp-server-windows-amd64.mcpb`
 3. Save to your Downloads folder
 
 ---
