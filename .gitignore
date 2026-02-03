@@ -11,3 +11,4 @@ node_modules/
 
 # Playwright temp
 .playwright-mcp/
+speaker-script.md
