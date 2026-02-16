@@ -41,6 +41,6 @@ mcp-workshop/
 
 Servers built by Olga (used in demos):
 - [gleif-mcp-server](https://github.com/olgasafonova/gleif-mcp-server) — Simplest, no auth
-- [miro-mcp-server](https://github.com/olgasafonova/miro-mcp-server) — Most complete, 77 tools
+- [miro-mcp-server](https://github.com/olgasafonova/miro-mcp-server) — Most complete, boards + diagrams + mindmaps
 - [mediawiki-mcp-server](https://github.com/olgasafonova/mediawiki-mcp-server)
 - [productplan-mcp-server](https://github.com/olgasafonova/productplan-mcp-server)
