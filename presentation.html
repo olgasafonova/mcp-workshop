@@ -5,151 +5,64 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MCP Workshop - Presentation</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      background: #000;
-      overflow: hidden;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    }
-
-    .presentation {
-      width: 100vw;
-      height: 100vh;
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-snap-type: y mandatory; }
+    body { background: #000; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+    .slide-holder {
+      min-height: 100vh;
+      min-height: 100svh;
       display: flex;
       align-items: center;
       justify-content: center;
+      scroll-snap-align: start;
     }
-
-    .slide-wrapper {
-      position: relative;
-      width: 1920px;
-      height: 1080px;
-      transform-origin: center center;
+    .slide-sizer {
+      width: calc(1920px * var(--s, 0.5));
+      height: calc(1080px * var(--s, 0.5));
+      overflow: hidden;
     }
-
-    .slide-wrapper iframe {
+    .slide-sizer iframe {
       width: 1920px;
       height: 1080px;
       border: none;
       display: block;
+      transform: scale(var(--s, 0.5));
+      transform-origin: top left;
+      pointer-events: none;
     }
-
-    /* Progress bar - minimal, at very bottom */
     .progress {
       position: fixed;
       bottom: 0;
       left: 0;
       height: 3px;
       background: #E53935;
-      transition: width 0.3s ease;
+      transition: width 0.2s ease;
       z-index: 1000;
     }
-
-    /* Overview mode */
-    .overview {
+    .counter {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: #1a1a1a;
-      display: none;
-      overflow-y: auto;
-      padding: 40px;
-      z-index: 2000;
-    }
-
-    .overview.active {
-      display: block;
-    }
-
-    .overview-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 20px;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-
-    .overview-slide {
-      aspect-ratio: 16/9;
-      background: #333;
-      border-radius: 8px;
-      overflow: hidden;
-      cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s;
-      position: relative;
-    }
-
-    .overview-slide:hover {
-      transform: scale(1.03);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
-    }
-
-    .overview-slide.current {
-      outline: 3px solid #E53935;
-    }
-
-    .overview-slide iframe {
-      width: 1920px;
-      height: 1080px;
-      transform-origin: top left;
-      pointer-events: none;
-      border: none;
-    }
-
-    .overview-slide-number {
-      position: absolute;
-      bottom: 8px;
-      right: 10px;
-      color: #fff;
+      bottom: 10px;
+      right: 14px;
+      color: #777;
       font-size: 12px;
-      font-weight: 600;
-      background: rgba(0,0,0,0.7);
-      padding: 2px 8px;
-      border-radius: 4px;
-    }
-
-    /* Help text - only visible on hover, very subtle */
-    .help {
-      position: fixed;
-      bottom: 12px;
-      left: 50%;
-      transform: translateX(-50%);
-      color: #333;
-      font-size: 11px;
+      font-variant-numeric: tabular-nums;
       z-index: 1000;
-      opacity: 0;
-      transition: opacity 0.3s;
       pointer-events: none;
     }
-
-    body:hover .help {
-      opacity: 1;
+    /* Phones in portrait: compact filmstrip instead of letterboxed screens */
+    @media (max-width: 720px) and (orientation: portrait) {
+      html { scroll-snap-type: y proximity; }
+      .slide-holder { min-height: 0; padding: 1.5vw 0; }
+      body { padding: 2vw 0; }
     }
   </style>
 </head>
 <body>
-  <div class="presentation">
-    <div class="slide-wrapper" id="slide-wrapper">
-      <iframe id="slide-frame" src=""></iframe>
-    </div>
-  </div>
-
+  <main id="deck"></main>
   <div class="progress" id="progress"></div>
-  <div class="help">← → navigate · ESC overview · F fullscreen</div>
-
-  <div class="overview" id="overview">
-    <div class="overview-grid" id="overview-grid"></div>
-  </div>
-
+  <div class="counter" id="counter"></div>
   <script>
-    const SLIDES = [
+    const slides = [
       'slides/slide-01-title.html',
       'slides/slide-02-problem.html',
       'slides/slide-03-rag-vs-mcp.html',
@@ -173,165 +86,71 @@
       'slides/slide-19-thankyou.html',
     ];
 
-    let currentSlide = 0;
-    let overviewMode = false;
+    const deck = document.getElementById('deck');
+    slides.forEach((src, i) => {
+      const holder = document.createElement('section');
+      holder.className = 'slide-holder';
+      const sizer = document.createElement('div');
+      sizer.className = 'slide-sizer';
+      const frame = document.createElement('iframe');
+      frame.src = src;
+      frame.loading = 'lazy';
+      frame.title = 'Slide ' + (i + 1);
+      sizer.appendChild(frame);
+      holder.appendChild(sizer);
+      deck.appendChild(holder);
+    });
 
-    const frame = document.getElementById('slide-frame');
-    const wrapper = document.getElementById('slide-wrapper');
+    function rescale() {
+      const portrait = matchMedia('(max-width: 720px) and (orientation: portrait)').matches;
+      const s = portrait
+        ? window.innerWidth / 1920
+        : Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+      document.documentElement.style.setProperty('--s', s);
+    }
+    rescale();
+    window.addEventListener('resize', rescale);
+
+    const holders = Array.from(document.querySelectorAll('.slide-holder'));
     const progress = document.getElementById('progress');
-    const overview = document.getElementById('overview');
-    const overviewGrid = document.getElementById('overview-grid');
+    const counter = document.getElementById('counter');
+    let current = 0;
 
-    // Scale slide to fit viewport while maintaining 16:9
-    function scaleSlide() {
-      const vw = window.innerWidth;
-      const vh = window.innerHeight;
-
-      // Calculate scale to fit 1920x1080 into viewport
-      const scaleX = vw / 1920;
-      const scaleY = vh / 1080;
-      const scale = Math.min(scaleX, scaleY);
-
-      wrapper.style.transform = `scale(${scale})`;
+    function update() {
+      progress.style.width = ((current + 1) / slides.length * 100) + '%';
+      counter.textContent = (current + 1) + ' / ' + slides.length;
     }
+    update();
 
-    function showSlide(index) {
-      if (index < 0) index = 0;
-      if (index >= SLIDES.length) index = SLIDES.length - 1;
-
-      currentSlide = index;
-      frame.src = SLIDES[index];
-
-      // Update progress
-      const pct = ((index + 1) / SLIDES.length) * 100;
-      progress.style.width = pct + '%';
-
-      // Update overview selection
-      document.querySelectorAll('.overview-slide').forEach((el, i) => {
-        el.classList.toggle('current', i === index);
-      });
-    }
-
-    function nextSlide() {
-      showSlide(currentSlide + 1);
-    }
-
-    function prevSlide() {
-      showSlide(currentSlide - 1);
-    }
-
-    function toggleOverview() {
-      overviewMode = !overviewMode;
-      overview.classList.toggle('active', overviewMode);
-
-      if (overviewMode) {
-        const current = document.querySelector('.overview-slide.current');
-        if (current) {
-          current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          current = holders.indexOf(e.target);
+          update();
         }
-      }
-    }
-
-    function toggleFullscreen() {
-      if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen();
-      } else {
-        document.exitFullscreen();
-      }
-    }
-
-    // Build overview grid with proper scaling
-    function buildOverview() {
-      SLIDES.forEach((slide, i) => {
-        const div = document.createElement('div');
-        div.className = 'overview-slide' + (i === 0 ? ' current' : '');
-
-        // Calculate scale for thumbnail (fit 1920x1080 into ~280px wide container)
-        const thumbScale = 280 / 1920;
-
-        div.innerHTML = `
-          <iframe src="${slide}" loading="lazy" style="transform: scale(${thumbScale})"></iframe>
-          <div class="overview-slide-number">${i + 1}</div>
-        `;
-        div.addEventListener('click', () => {
-          showSlide(i);
-          toggleOverview();
-        });
-        overviewGrid.appendChild(div);
       });
+    }, { threshold: 0.5 });
+    holders.forEach(h => io.observe(h));
+
+    function go(n) {
+      const target = holders[Math.max(0, Math.min(holders.length - 1, n))];
+      target.scrollIntoView({ behavior: 'smooth' });
     }
 
-    // Keyboard navigation
-    document.addEventListener('keydown', (e) => {
-      if (overviewMode && e.key === 'Escape') {
-        toggleOverview();
-        return;
-      }
-
+    document.addEventListener('keydown', e => {
       switch (e.key) {
-        case 'ArrowRight':
-        case 'ArrowDown':
-        case ' ':
-        case 'PageDown':
-          e.preventDefault();
-          if (overviewMode) toggleOverview();
-          nextSlide();
-          break;
-        case 'ArrowLeft':
-        case 'ArrowUp':
-        case 'PageUp':
-          e.preventDefault();
-          if (overviewMode) toggleOverview();
-          prevSlide();
-          break;
-        case 'Escape':
-          toggleOverview();
-          break;
-        case 'f':
-        case 'F':
-          toggleFullscreen();
-          break;
-        case 'Home':
-          showSlide(0);
-          break;
-        case 'End':
-          showSlide(SLIDES.length - 1);
+        case 'ArrowRight': case 'ArrowDown': case ' ': case 'PageDown':
+          e.preventDefault(); go(current + 1); break;
+        case 'ArrowLeft': case 'ArrowUp': case 'PageUp':
+          e.preventDefault(); go(current - 1); break;
+        case 'Home': e.preventDefault(); go(0); break;
+        case 'End': e.preventDefault(); go(holders.length - 1); break;
+        case 'f': case 'F':
+          if (document.fullscreenElement) document.exitFullscreen();
+          else document.documentElement.requestFullscreen();
           break;
       }
     });
-
-    // Touch/swipe support
-    let touchStartX = 0;
-    document.addEventListener('touchstart', (e) => {
-      touchStartX = e.touches[0].clientX;
-    });
-    document.addEventListener('touchend', (e) => {
-      const touchEndX = e.changedTouches[0].clientX;
-      const diff = touchStartX - touchEndX;
-      if (Math.abs(diff) > 50) {
-        if (diff > 0) nextSlide();
-        else prevSlide();
-      }
-    });
-
-    // Click navigation (left half = back, right half = forward)
-    document.querySelector('.presentation').addEventListener('click', (e) => {
-      if (overviewMode) return;
-      const clickX = e.clientX / window.innerWidth;
-      if (clickX > 0.5) nextSlide();
-      else prevSlide();
-    });
-
-    // Handle resize
-    window.addEventListener('resize', scaleSlide);
-    document.addEventListener('fullscreenchange', () => {
-      setTimeout(scaleSlide, 100);
-    });
-
-    // Initialize
-    buildOverview();
-    scaleSlide();
-    showSlide(0);
   </script>
 </body>
 </html>
